@@ -1,0 +1,27 @@
+footer {
+  background-image: url('../../../assets/footerBg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 466px;
+}
+
+footer a span {
+  color: #0F83B2;
+}
+
+footer .logo {
+  width: 215px;
+  height: 79px;
+}
+
+i {
+  color: #F26C62;
+  font-size: 31px;
+}
+
+p,
+span,
+a {
+  line-height: 140%;
+}

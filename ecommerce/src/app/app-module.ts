@@ -34,7 +34,7 @@ import { Contactus } from './components/contactus/contactus';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,FormsModule 
+    AppRoutingModule,FormsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners()

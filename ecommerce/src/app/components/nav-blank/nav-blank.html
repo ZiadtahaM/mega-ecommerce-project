@@ -1,1 +1,46 @@
-<p>nav-blank works!</p>
+<div class="top-nav">
+  <div class="container custom-container">
+    <div class="d-flex justify-content-between align-items-center py-4 py-lg-2">
+      <div class="d-flex align-items-center ">
+        <i class="fas fa-truck fs-5 me-2"></i>
+        <p class="mb-0">Free shipping on orders over $150</p>
+      </div>
+      <div class="d-flex gap-2 gap-lg-3">
+        <a href="#">Login</a>
+        <a href="#">Register</a>
+      </div>
+    </div>
+  </div>
+</div>
+<nav class="navbar navbar-expand-lg">
+  <div class="container custom-container">
+    <a href="#" class="logo"><img src="assets/logo.png" alt="logo" class="w-100">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+      <div class="navbar-nav d-flex justify-content-between w-100">
+        <ul class="nav-links me-auto m-lg-auto d-flex flex-column gap-5 fw-bold flex-lg-row">
+          <li class="nav-link"><a routerLink="/home">Home</a></li>
+          <li class="nav-link"><a routerLink="/products">Shop</a></li>
+          <li class="nav-link"><a routerLink="/pages">Pages</a></li>
+          <li class="nav-link"><a routerLink="/blog">Blog</a></li>
+          <li class="nav-link"><a routerLink="/contactus">Contact</a></li>
+        </ul>
+        <div class="d-flex gap-5 align-items-center nav-link">
+          <a href="#" class="cart-icon me-auto m-lg-auto">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-badge">3</span>
+          </a>
+          <div class="search-box d-lg-flex align-items-center border border-2 p-1 rounded-5 gap-2 d-none">
+            <input class="border-0" type="text" placeholder="Search" aria-label="default input example">
+            <div class="search-icon"><i class="fa-solid fa-magnifying-glass search-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
