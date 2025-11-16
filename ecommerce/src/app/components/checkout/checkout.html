@@ -1,1 +1,517 @@
-<p>checkout works!</p>
+<!-- Checkout Page Template -->
+<!-- This template provides a two-column layout for checkout: -->
+<!-- Left column: Delivery info, Payment forms -->
+<!-- Right column: Order summary -->
+
+<div class="checkout-container">
+  <div class="container py-5">
+    <!-- Page Header -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <h1 class="checkout-title">Checkout</h1>
+        <p class="checkout-subtitle">Please review your order and complete your purchase</p>
+      </div>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div class="row mb-4" *ngIf="successMessage || errorMessage">
+      <div class="col-12">
+        <div class="alert alert-success" *ngIf="successMessage" role="alert">
+          <i class="fas fa-check-circle me-2"></i>{{ successMessage }}
+        </div>
+        <div class="alert alert-danger" *ngIf="errorMessage" role="alert">
+          <i class="fas fa-exclamation-circle me-2"></i>{{ errorMessage }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Left Column: Forms and Payment -->
+      <div class="col-lg-8 mb-4">
+        <!-- Delivery Info Section -->
+        <div class="checkout-section mb-4">
+          <h2 class="section-title">
+            <i class="fas fa-truck me-2"></i>Delivery Info
+          </h2>
+          <form [formGroup]="shippingForm">
+            <div class="row">
+              <!-- First Name - Last Name -->
+              <div class="col-md-6 mb-3">
+                <label for="shippingFirstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  id="shippingFirstName"
+                  class="form-control"
+                  formControlName="firstName"
+                  [class.is-invalid]="hasError('firstName', shippingForm)"
+                  placeholder="John"
+                />
+                <div class="invalid-feedback" *ngIf="hasError('firstName', shippingForm)">
+                  {{ getErrorMessage('firstName', shippingForm) }}
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="shippingLastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  id="shippingLastName"
+                  class="form-control"
+                  formControlName="lastName"
+                  [class.is-invalid]="hasError('lastName', shippingForm)"
+                  placeholder="Doe"
+                />
+                <div class="invalid-feedback" *ngIf="hasError('lastName', shippingForm)">
+                  {{ getErrorMessage('lastName', shippingForm) }}
+                </div>
+              </div>
+
+              <!-- Street Address -->
+              <div class="col-12 mb-3">
+                <label for="shippingStreetAddress" class="form-label">Street Address <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  id="shippingStreetAddress"
+                  class="form-control"
+                  formControlName="streetAddress"
+                  [class.is-invalid]="hasError('streetAddress', shippingForm)"
+                  placeholder="123 Main St"
+                />
+                <div class="invalid-feedback" *ngIf="hasError('streetAddress', shippingForm)">
+                  {{ getErrorMessage('streetAddress', shippingForm) }}
+                </div>
+              </div>
+
+              <!-- Town/City (Dropdown) - State (Dropdown) -->
+              <div class="col-md-6 mb-3">
+                <label for="shippingCity" class="form-label">Town/City <span class="text-danger">*</span></label>
+                <select
+                  id="shippingCity"
+                  class="form-select"
+                  formControlName="city"
+                  [class.is-invalid]="hasError('city', shippingForm)"
+                >
+                  <option value="">Select City</option>
+                  <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="hasError('city', shippingForm)">
+                  {{ getErrorMessage('city', shippingForm) }}
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="shippingState" class="form-label">State <span class="text-danger">*</span></label>
+                <select
+                  id="shippingState"
+                  class="form-select"
+                  formControlName="state"
+                  [class.is-invalid]="hasError('state', shippingForm)"
+                >
+                  <option value="">Select State</option>
+                  <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="hasError('state', shippingForm)">
+                  {{ getErrorMessage('state', shippingForm) }}
+                </div>
+              </div>
+
+              <!-- Zip Code - Phone -->
+              <div class="col-md-6 mb-3">
+                <label for="shippingPostalCode" class="form-label">Zip Code <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  id="shippingPostalCode"
+                  class="form-control"
+                  formControlName="postalCode"
+                  [class.is-invalid]="hasError('postalCode', shippingForm)"
+                  placeholder="10001"
+                />
+                <div class="invalid-feedback" *ngIf="hasError('postalCode', shippingForm)">
+                  {{ getErrorMessage('postalCode', shippingForm) }}
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="shippingPhoneNumber" class="form-label">Phone <span class="text-danger">*</span></label>
+                <input
+                  type="tel"
+                  id="shippingPhoneNumber"
+                  class="form-control"
+                  formControlName="phoneNumber"
+                  [class.is-invalid]="hasError('phoneNumber', shippingForm)"
+                  placeholder="+1 (555) 123-4567"
+                />
+                <div class="invalid-feedback" *ngIf="hasError('phoneNumber', shippingForm)">
+                  {{ getErrorMessage('phoneNumber', shippingForm) }}
+                </div>
+              </div>
+
+              <!-- Email Address -->
+              <div class="col-12 mb-3">
+                <label for="shippingEmail" class="form-label">Email Address <span class="text-danger">*</span></label>
+                <input
+                  type="email"
+                  id="shippingEmail"
+                  class="form-control"
+                  formControlName="email"
+                  [class.is-invalid]="hasError('email', shippingForm)"
+                  placeholder="john.doe@example.com"
+                />
+                <div class="invalid-feedback" *ngIf="hasError('email', shippingForm)">
+                  {{ getErrorMessage('email', shippingForm) }}
+                </div>
+              </div>
+
+              <!-- Order Notes (Optional) -->
+              <div class="col-12 mb-3">
+                <label for="orderNotes" class="form-label">Order Notes <span class="text-muted">(optional)</span></label>
+                <textarea
+                  id="orderNotes"
+                  class="form-control"
+                  formControlName="orderNotes"
+                  rows="3"
+                  placeholder="Special delivery instructions, notes, etc."
+                ></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Payment Section -->
+        <div class="checkout-section mb-4">
+          <h2 class="section-title">
+            <i class="fas fa-credit-card me-2"></i>Payment
+          </h2>
+          <form [formGroup]="paymentForm">
+            <!-- Payment Method Selection -->
+            <div class="mb-4">
+              <label class="form-label">Payment Method <span class="text-danger">*</span></label>
+              <div class="form-check mb-2 form-check-with-icons">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  id="paymentCard"
+                  formControlName="paymentMethod"
+                  value="card"
+                  (change)="onPaymentMethodChange('card')"
+                />
+                <label class="form-check-label" for="paymentCard">
+                  <i class="fas fa-credit-card me-2"></i>Credit Card
+                </label>
+                <span class="payment-icons ms-auto">
+                  <i class="fab fa-cc-visa me-1" title="Visa"></i>
+                  <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+                </span>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  id="paymentPaypal"
+                  formControlName="paymentMethod"
+                  value="paypal"
+                  (change)="onPaymentMethodChange('paypal')"
+                />
+                <label class="form-check-label" for="paymentPaypal">
+                  <i class="fab fa-paypal me-2"></i>PayPal
+                </label>
+              </div>
+            </div>
+
+            <!-- Credit Card Fields (shown when card is selected) -->
+            <div *ngIf="paymentMethod === 'card'">
+              <!-- Stripe Card Element (for secure card input) -->
+              <div class="mb-3">
+                <label class="form-label">Card Number <span class="text-danger">*</span></label>
+                <div class="stripe-card-wrapper">
+                  <div id="card-element" #cardElement></div>
+                </div>
+                <div id="card-errors" class="text-danger mt-2" role="alert"></div>
+              </div>
+
+              <!-- Card Name -->
+              <div class="mb-3">
+                <label for="cardName" class="form-label">Name on Card <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  id="cardName"
+                  class="form-control"
+                  formControlName="cardName"
+                  [class.is-invalid]="hasError('cardName', paymentForm)"
+                  placeholder="John Doe"
+                />
+                <div class="invalid-feedback" *ngIf="hasError('cardName', paymentForm)">
+                  {{ getErrorMessage('cardName', paymentForm) }}
+                </div>
+              </div>
+
+              <!-- Expiration Date and Security Code -->
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="cardExpiry" class="form-label">Expiration Date <span class="text-danger">*</span></label>
+                  <input
+                    type="text"
+                    id="cardExpiry"
+                    class="form-control"
+                    formControlName="cardExpiry"
+                    [class.is-invalid]="hasError('cardExpiry', paymentForm)"
+                    placeholder="MM/YY"
+                    maxlength="5"
+                    (input)="formatCardExpiry($event)"
+                  />
+                  <div class="invalid-feedback" *ngIf="hasError('cardExpiry', paymentForm)">
+                    {{ getErrorMessage('cardExpiry', paymentForm) }}
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label for="cardCvc" class="form-label">Security Code <span class="text-danger">*</span></label>
+                  <input
+                    type="text"
+                    id="cardCvc"
+                    class="form-control"
+                    formControlName="cardCvc"
+                    [class.is-invalid]="hasError('cardCvc', paymentForm)"
+                    placeholder="123"
+                    maxlength="4"
+                  />
+                  <div class="invalid-feedback" *ngIf="hasError('cardCvc', paymentForm)">
+                    {{ getErrorMessage('cardCvc', paymentForm) }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>
+                <small>Test card: 4242 4242 4242 4242 | Any future date | Any CVC</small>
+              </div>
+            </div>
+
+            <!-- PayPal Info (shown when PayPal is selected) -->
+            <div *ngIf="paymentMethod === 'paypal'" class="alert alert-info">
+              <i class="fab fa-paypal me-2"></i>
+              <small>You will be redirected to PayPal to complete your payment.</small>
+            </div>
+          </form>
+        </div>
+
+        <!-- Billing Address Section -->
+        <div class="checkout-section mb-4">
+          <h2 class="section-title">
+            <i class="fas fa-map-marker-alt me-2"></i>Billing Address
+          </h2>
+          <div class="mb-3">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="useSameAddress"
+                [checked]="useShippingAsBilling"
+                (change)="onUseSameAddressChange($event)"
+              />
+              <label class="form-check-label" for="useSameAddress">
+                Use shipping address as billing address
+              </label>
+            </div>
+          </div>
+
+          <!-- Billing Address Form (shown when checkbox is unchecked) -->
+          <form [formGroup]="billingForm" *ngIf="!useShippingAsBilling">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="billingFirstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  id="billingFirstName"
+                  class="form-control"
+                  formControlName="firstName"
+                  [class.is-invalid]="hasError('firstName', billingForm)"
+                  placeholder="John"
+                />
+                <div class="invalid-feedback" *ngIf="hasError('firstName', billingForm)">
+                  {{ getErrorMessage('firstName', billingForm) }}
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="billingLastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  id="billingLastName"
+                  class="form-control"
+                  formControlName="lastName"
+                  [class.is-invalid]="hasError('lastName', billingForm)"
+                  placeholder="Doe"
+                />
+                <div class="invalid-feedback" *ngIf="hasError('lastName', billingForm)">
+                  {{ getErrorMessage('lastName', billingForm) }}
+                </div>
+              </div>
+
+              <div class="col-12 mb-3">
+                <label for="billingStreetAddress" class="form-label">Street Address <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  id="billingStreetAddress"
+                  class="form-control"
+                  formControlName="streetAddress"
+                  [class.is-invalid]="hasError('streetAddress', billingForm)"
+                  placeholder="123 Main St"
+                />
+                <div class="invalid-feedback" *ngIf="hasError('streetAddress', billingForm)">
+                  {{ getErrorMessage('streetAddress', billingForm) }}
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="billingCity" class="form-label">Town/City <span class="text-danger">*</span></label>
+                <select
+                  id="billingCity"
+                  class="form-select"
+                  formControlName="city"
+                  [class.is-invalid]="hasError('city', billingForm)"
+                >
+                  <option value="">Select City</option>
+                  <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="hasError('city', billingForm)">
+                  {{ getErrorMessage('city', billingForm) }}
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="billingState" class="form-label">State <span class="text-danger">*</span></label>
+                <select
+                  id="billingState"
+                  class="form-select"
+                  formControlName="state"
+                  [class.is-invalid]="hasError('state', billingForm)"
+                >
+                  <option value="">Select State</option>
+                  <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="hasError('state', billingForm)">
+                  {{ getErrorMessage('state', billingForm) }}
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="billingPostalCode" class="form-label">Zip Code <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  id="billingPostalCode"
+                  class="form-control"
+                  formControlName="postalCode"
+                  [class.is-invalid]="hasError('postalCode', billingForm)"
+                  placeholder="10001"
+                />
+                <div class="invalid-feedback" *ngIf="hasError('postalCode', billingForm)">
+                  {{ getErrorMessage('postalCode', billingForm) }}
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="billingPhoneNumber" class="form-label">Phone <span class="text-danger">*</span></label>
+                <input
+                  type="tel"
+                  id="billingPhoneNumber"
+                  class="form-control"
+                  formControlName="phoneNumber"
+                  [class.is-invalid]="hasError('phoneNumber', billingForm)"
+                  placeholder="+1 (555) 123-4567"
+                />
+                <div class="invalid-feedback" *ngIf="hasError('phoneNumber', billingForm)">
+                  {{ getErrorMessage('phoneNumber', billingForm) }}
+                </div>
+              </div>
+
+              <div class="col-12 mb-3">
+                <label for="billingEmail" class="form-label">Email Address <span class="text-danger">*</span></label>
+                <input
+                  type="email"
+                  id="billingEmail"
+                  class="form-control"
+                  formControlName="email"
+                  [class.is-invalid]="hasError('email', billingForm)"
+                  placeholder="john.doe@example.com"
+                />
+                <div class="invalid-feedback" *ngIf="hasError('email', billingForm)">
+                  {{ getErrorMessage('email', billingForm) }}
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="checkout-actions">
+          <button
+            type="button"
+            class="btn btn-primary btn-lg w-100"
+            (click)="onSubmit()"
+            [disabled]="isProcessingPayment || isLoading"
+          >
+            <span *ngIf="!isProcessingPayment">
+              <i class="fas fa-lock me-2"></i>Complete Purchase
+            </span>
+            <span *ngIf="isProcessingPayment">
+              <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              Processing Payment...
+            </span>
+          </button>
+          <p class="text-center text-muted mt-3">
+            <small>By completing your purchase, you agree to our Terms of Service and Privacy Policy</small>
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Column: Order Summary -->
+      <div class="col-lg-4">
+        <div class="order-summary-card">
+          <h3 class="summary-title">Order Summary</h3>
+          
+          <!-- Cart Items -->
+          <div class="order-items">
+            <div class="order-item" *ngFor="let item of cartItems">
+              <div class="item-image">
+                <img [src]="item.productImage" [alt]="item.productName" />
+              </div>
+              <div class="item-details">
+                <h5 class="item-name">{{ item.productName }}</h5>
+                <p class="item-quantity">Quantity: {{ item.quantity }}</p>
+                <p class="item-price">${{ item.price.toFixed(2) }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Totals -->
+          <div class="order-totals">
+            <div class="total-row">
+              <span>Subtotal</span>
+              <span>${{ subtotal.toFixed(2) }}</span>
+            </div>
+            <div class="total-row">
+              <span>Shipping</span>
+              <span *ngIf="shippingCost === 0" class="text-success">FREE</span>
+              <span *ngIf="shippingCost > 0">${{ shippingCost.toFixed(2) }}</span>
+            </div>
+            <div class="total-row">
+              <span>Tax</span>
+              <span>${{ tax.toFixed(2) }}</span>
+            </div>
+            <div class="total-row total-final">
+              <span><strong>Total</strong></span>
+              <span><strong>${{ total.toFixed(2) }}</strong></span>
+            </div>
+          </div>
+
+          <!-- Free Shipping Notice -->
+          <div class="free-shipping-notice" *ngIf="subtotal < 50">
+            <i class="fas fa-truck me-2"></i>
+            <small>Add ${{ (50 - subtotal).toFixed(2) }} more for free shipping!</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
