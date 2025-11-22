@@ -1,1 +1,89 @@
-<p>nav-auth works!</p>
+<nav class="navbar">
+  <div class="container-nav">
+    <!-- Brand -->
+    <div class="brand">
+      <a routerLink="/home">🧸 ToyStore</a>
+    </div>
+    
+    <!-- Navigation Links -->
+    <div class="nav-links">
+      <a routerLink="/home">Home</a>
+      <a routerLink="/products">Shop</a>
+      <a routerLink="/blog">Blog</a>
+      <a routerLink="/contact">Contact</a>
+      <a routerLink="/cart">cart</a>
+      <!-- Admin link - only show if user is admin -->
+      <a *ngIf="api.isAdmin()" routerLink="/dash">Admin Dashboard</a>
+    </div>
+    
+    <!-- Nav Actions -->
+    <div class="nav-actions">
+      <!-- Cart Icon -->
+      <button class="icon-btn" (click)="toggleCart()">
+        🛒
+        <span class="badge" *ngIf="api.cart.length > 0">{{ api.cart.length }}</span>
+      </button>
+      
+      <!-- User Actions -->
+      <div *ngIf="api.isLogin">
+        <span class="welcome">Hi, {{ api.username }}</span>
+        <button class="logout-btn" (click)="logout()">Logout</button>
+      </div>
+      
+      <a *ngIf="!api.isLogin" routerLink="/login" class="login-btn">Login</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Cart Sidebar -->
+<div class="cart-overlay" *ngIf="showCart" (click)="toggleCart()">
+  <div class="cart-sidebar" (click)="$event.stopPropagation()">
+    <!-- Cart Header -->
+    <div class="cart-header">
+      <h3>Your Cart ({{ api.cart.length }})</h3>
+      <button class="close-btn" (click)="toggleCart()">×</button>
+    </div>
+    
+    <!-- Cart Items -->
+    <div class="cart-items">
+      <div *ngIf="api.cart.length === 0" class="empty-cart">
+        <p>Your cart is empty</p>
+      </div>
+      
+      <div class="cart-item" *ngFor="let item of api.cart">
+        <img [src]="item.thumbnail" [alt]="item.title">
+        
+        <div class="item-details">
+          <h5>{{ item.title }}</h5>
+          <p class="item-price">${{ item.price }}</p>
+          
+          <!-- Quantity Controls -->
+          <div class="cart-qty-controls">
+            <button class="qty-btn" (click)="decreaseCartQty(item)">-</button>
+            <span class="qty-display">{{ item.quantity }}</span>
+            <button class="qty-btn" (click)="increaseCartQty(item)">+</button>
+          </div>
+          
+          <p class="item-subtotal">Subtotal: ${{ (item.price * item.quantity).toFixed(2) }}</p>
+          
+          <button class="remove-item-btn" (click)="remove(item)">
+            🗑️ Remove
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Cart Footer -->
+    <div class="cart-footer" *ngIf="api.cart.length > 0">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span class="total-amount">${{ api.getCartTotal().toFixed(2) }}</span>
+      </div>
+      
+    
+      <button class="checkout-btn" (click)="goToCheckout()">
+        Proceed to Checkout
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,86 @@
-<p>blog works!</p>
+<div class="blog-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <!-- Categories -->
+    <div class="sidebar-section">
+      <h3>Categories</h3>
+      <ul class="category-list">
+        <li *ngFor="let category of categories" 
+            [class.active]="category === selectedCategory"
+            (click)="selectCategory(category)">
+          {{ category }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Recent Posts -->
+    <div class="sidebar-section">
+      <h3>Recent Post</h3>
+      <div class="recent-posts">
+        <div class="recent-post-item" *ngFor="let post of recentPosts">
+          <img [src]="post.image" [alt]="post.title">
+          <div class="recent-post-content">
+            <h4>{{ post.title }}</h4>
+            <p class="date">{{ post.date }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popular Tags -->
+    <div class="sidebar-section">
+      <h3>Popular Tag</h3>
+      <div class="tags">
+        <span class="tag" *ngFor="let tag of popularTags">{{ tag }}</span>
+      </div>
+    </div>
+
+    <!-- Newsletter Box -->
+    <div class="sidebar-section newsletter">
+      <div class="newsletter-content">
+        <h3>Latest Type of Articles in your Inbox</h3>
+        <button class="subscribe-btn">Join Now</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <h1 class="page-title">Blog Standard</h1>
+    <p class="page-subtitle">Home / Blogs</p>
+
+    <!-- Blog Posts -->
+    <div class="blog-posts">
+      <article class="blog-post" *ngFor="let post of paginatedPosts">
+        <img [src]="post.image" [alt]="post.title" class="post-image">
+        <div class="post-content">
+          <p class="post-date">{{ post.date }}</p>
+          <h2 class="post-title">{{ post.title }}</h2>
+          <p class="post-description">{{ post.description }}</p>
+        </div>
+      </article>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <button class="page-btn" 
+              (click)="previousPage()" 
+              [disabled]="currentPage === 1">
+        ←
+      </button>
+      
+      <button *ngFor="let page of pageNumbers" 
+              class="page-btn" 
+              [class.active]="page === currentPage"
+              (click)="goToPage(page)">
+        {{ page }}
+      </button>
+      
+      <button class="page-btn" 
+              (click)="nextPage()" 
+              [disabled]="currentPage === totalPages">
+        →
+      </button>
+    </div>
+  </main>
+</div>

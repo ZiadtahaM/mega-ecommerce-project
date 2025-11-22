@@ -1,0 +1,62 @@
+<div class="login-container">
+  <div class="login-box">
+    <!-- Logo/Brand -->
+    <div class="login-header">
+      <h1>🧸 ToyStore</h1>
+      <p>Welcome back! Please login to your account.</p>
+    </div>
+    
+    <!-- Error Message -->
+    <div class="error-message" *ngIf="errorMessage">
+      ⚠️ {{ errorMessage }}
+    </div>
+    
+    <!-- Login Form -->
+    <form (ngSubmit)="login()">
+      <div class="form-group">
+        <label>Username</label>
+        <input 
+          type="text" 
+          [(ngModel)]="username" 
+          name="username"
+          placeholder="Enter your username"
+          [disabled]="isLoading"
+          required
+        >
+      </div>
+      
+      <div class="form-group">
+        <label>Password</label>
+        <input 
+          type="password" 
+          [(ngModel)]="password" 
+          name="password"
+          placeholder="Enter your password"
+          [disabled]="isLoading"
+          required
+        >
+      </div>
+      
+      <button 
+        type="submit" 
+        class="login-btn"
+        [disabled]="isLoading"
+      >
+        <span *ngIf="!isLoading">Login</span>
+        <span *ngIf="isLoading">Logging in...</span>
+      </button>
+    </form>
+    
+    <!-- Register Link -->
+    <div class="register-link">
+      <p>Don't have an account? <a routerLink="/register">Register here</a></p>
+    </div>
+    
+    <!-- Test Credentials -->
+    <div class="test-credentials">
+      <p><strong>Test Credentials:</strong></p>
+      <p>Admin: <code>emilys</code> / <code>emilyspass</code></p>
+      <p>User: <code>michaelw</code> / <code>michaelwpass</code></p>
+    </div>
+  </div>
+</div>

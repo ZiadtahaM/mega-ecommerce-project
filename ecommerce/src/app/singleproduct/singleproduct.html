@@ -1,0 +1,179 @@
+@if (loading) {
+  <div class="loading-spinner">Loading...</div>
+}
+
+@if (!loading && product) {
+  <div class="product-page">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+      <a routerLink="/">Home</a> / {{product.category}} / {{product.title}}
+    </nav>
+
+    <div class="product-layout">
+      <!-- Left: Images -->
+      <div class="product-images-col">
+        <div class="main-image-wrapper">
+          <img [src]="selectedImage" [alt]="product.title" class="main-product-image">
+        </div>
+        <div class="thumbnail-strip">
+          @for (img of product.images; track img) {
+            <img [src]="img" 
+                 alt="thumbnail" 
+                 class="thumbnail-image" 
+                 [class.active]="selectedImage === img"
+                 (click)="selectedImage = img">
+          }
+        </div>
+      </div>
+
+      <!-- Right: Product Info Box -->
+      <div class="product-info-box">
+        <h1 class="product-title">{{product.title}}</h1>
+        
+        <div class="price-wrapper">
+          <span class="product-price">${{product.price}}</span>
+        </div>
+
+        <!-- Star Rating -->
+        <div class="rating-wrapper">
+          @for (star of getStarArray(); track star) {
+            <span class="star" [class.filled]="star <= product.rating">★</span>
+          }
+          <span class="rating-text">({{product.reviews?.length || 0}} Reviews)</span>
+        </div>
+
+        <p class="product-description">{{product.description}}</p>
+
+        <!-- Share Section -->
+        <div class="share-section">
+          <span class="share-label">Share this:</span>
+          <button class="share-icon" title="Email">📧</button>
+          <button class="share-icon" title="Pinterest">📌</button>
+          <button class="share-icon" title="Facebook">👍</button>
+          <button class="share-icon" title="Copy Link">📋</button>
+        </div>
+
+        <!-- Quantity + Add to Cart -->
+        <div class="cart-section">
+          <div class="quantity-selector">
+            <button (click)="decreaseQty()">−</button>
+            <input type="number" [(ngModel)]="quantity" min="1" readonly>
+            <button (click)="increaseQty()">+</button>
+          </div>
+          <button class="add-to-cart-btn" (click)="addToCart()">ADD TO CART</button>
+          <button class="icon-action-btn" title="Add to Wishlist">❤️</button>
+          <button class="icon-action-btn" title="Compare">⚖️</button>
+        </div>
+
+        <!-- Product Meta -->
+        <div class="product-meta">
+          <p><strong>SKU:</strong> {{product.sku}}</p>
+          <p><strong>Category:</strong> {{product.category}}</p>
+          @if (product.tags && product.tags.length > 0) {
+            <p><strong>Tags:</strong> {{product.tags.join(', ')}}</p>
+          }
+        </div>
+
+        <!-- Payment Badges -->
+        <div class="guaranteed-checkout">
+          <p class="checkout-title">Guaranteed Safe Checkout</p>
+          <div class="payment-badges">
+            <span class="badge-item">💳 VISA</span>
+            <span class="badge-item">💳 Mastercard</span>
+            <span class="badge-item">💳 PayPal</span>
+            <span class="badge-item">💳 Amex</span>
+          </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs-wrapper">
+          <div class="tab-headers">
+            <button class="tab-btn" 
+                    [class.active]="activeTab === 'description'" 
+                    (click)="activeTab = 'description'">
+              Description
+            </button>
+            <button class="tab-btn" 
+                    [class.active]="activeTab === 'reviews'" 
+                    (click)="activeTab = 'reviews'">
+              Reviews ({{product.reviews?.length || 0}})
+            </button>
+          </div>
+          
+          <div class="tab-body">
+            @if (activeTab === 'description') {
+              <div class="tab-content">
+                <p>{{product.description}}</p>
+                <ul class="product-specs">
+                  <li>Stock: {{product.stock}} available</li>
+                  @if (product.shippingInformation) {
+                    <li>{{product.shippingInformation}}</li>
+                  }
+                  @if (product.warrantyInformation) {
+                    <li>{{product.warrantyInformation}}</li>
+                  }
+                  @if (product.returnPolicy) {
+                    <li>{{product.returnPolicy}}</li>
+                  }
+                </ul>
+              </div>
+            }
+            
+            @if (activeTab === 'reviews') {
+              <div class="tab-content reviews-section">
+                @for (review of product.reviews; track review.reviewerEmail) {
+                  <div class="review-block">
+                    <div class="reviewer-info">
+                      <span class="reviewer-name">{{review.reviewerName}}</span>
+                      <span class="review-rating">
+                        @for (star of getStarArray(); track star) {
+                          <span [class.filled]="star <= review.rating">★</span>
+                        }
+                      </span>
+                    </div>
+                    <p class="review-text">{{review.comment}}</p>
+                    <span class="review-date">{{review.date | date}}</span>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    @if (relatedProducts.length > 0) {
+      <div class="related-products-section">
+        <h2 class="section-heading">Related products</h2>
+        <div class="products-grid">
+          @for (item of relatedProducts; track item.id) {
+            <div class="product-card" (click)="goToProduct(item.id)">
+              @if (item.discountPercentage > 10) {
+                <span class="sale-badge">SALE</span>
+              }
+              <button class="wishlist-icon">❤</button>
+              <img [src]="item.thumbnail" [alt]="item.title" class="product-card-image">
+              <div class="product-card-body">
+                <h5 class="product-card-title">{{item.title}}</h5>
+                <div class="card-rating">
+                  @for (star of getStarArray(); track star) {
+                    <span class="star" [class.filled]="star <= item.rating">★</span>
+                  }
+                </div>
+                <div class="product-card-price">${{item.price}}</div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+}
+
+@if (!loading && !product) {
+  <div class="error-message">
+    <h2>Product not found</h2>
+    <button routerLink="/">Go back to home</button>
+  </div>
+}

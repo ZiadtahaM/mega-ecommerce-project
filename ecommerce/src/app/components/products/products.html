@@ -1,1 +1,122 @@
-<p>products works!</p>
+<div class="products-container">
+<!-- Hero Section -->
+<section class="products-hero py-5">
+<div class="container-fluid px-5">
+<div class="row align-items-center">
+<div class="col-lg-6">
+<h1 class="hero-title">Our Amazing Toys Collection</h1>
+<p class="hero-subtitle">Discover toys that spark imagination and support your child's development</p>
+</div>
+<div class="col-lg-6 text-center">
+<img src="imgs/photos_gallery_3_3.jpg" alt="Toys Collection" class="img-fluid rounded-3">
+</div>
+</div>
+</div>
+</section>
+<!-- Filters Section -->
+<section class="filters-section py-4">
+<div class="container-fluid px-5">
+<div class="row align-items-center">
+<div class="col-lg-8">
+<div class="filter-tabs d-flex flex-wrap gap-2 mb-3">
+<button 
+*ngFor="let category of categories" 
+class="btn rounded-pill px-4"
+[class]="selectedCategory === category ? 'btn-warning' : 'btn-outline-cyan'"
+(click)="filterByCategory(category)"
+>
+{{category}}
+</button>
+</div>
+</div>
+<div class="col-lg-4">
+<select class="form-select rounded-pill" >
+<option *ngFor="let range of priceRanges" [value]="range">
+{{range}}
+</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+<!-- Products Grid -->
+<section class="products-section py-5">
+<div class="container-fluid px-5">
+<div class="row mb-4">
+<div class="col-12">
+<h2 class="section-title mb-0">Products ({{filteredProducts.length}})</h2>
+</div>
+</div>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+<div class="col" *ngFor="let item of filteredProducts">
+<div class="card product-card h-100 border-0 shadow-sm">
+<div class="position-relative product-img-wrapper">
+<img [src]="item.images[0]" class="card-img-top" [alt]="item.title" (click)="veiwproduct(item.id)" style="cursor: pointer;">
+<span *ngIf="item.discountPercentage > 0" class="badge bg-danger position-absolute discount-badge">-{{item.discountPercentage | number:'1.0-0'}}%</span>
+<span *ngIf="item.stock <= 5" class="badge bg-warning text-dark position-absolute low-stock-badge">Low Stock</span>
+</div>
+<div class="card-body d-flex flex-column">
+<p class="text-uppercase text-muted small mb-2">{{item.tags[0] || item.category}}</p>
+<h5 class="card-title product-title mb-3">{{item.title}}</h5>
+<!-- Rating -->
+<div class="d-flex align-items-center mb-3">
+<div class="stars me-2">
+
+</div>
+<span class="rating-text">{{item.rating}}</span>
+<span class="stock-info ms-auto text-muted small">({{item.stock}} left)</span>
+</div>
+<!-- Price -->
+<div class="mt-auto">
+<div class="d-flex justify-content-between align-items-center mb-3">
+<div>
+<div *ngIf="item.discountPercentage > 0" class="text-muted text-decoration-line-through small">${{item.price}}</div>
+<div class="text-danger fw-bold fs-5" *ngIf="item.discountPercentage > 0; else noDiscount">
+${{getPriceForDisplay(item) | number:'1.2-2'}}
+</div>
+<ng-template #noDiscount>
+<div class="text-danger fw-bold fs-5">${{item.price}}</div>
+</ng-template>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="d-flex gap-2">
+<button class="btn btn-success btn-sm rounded-pill flex-fill" (click)="addTocCart(item)" [disabled]="item.stock === 0">
+<i class="fas fa-shopping-cart me-1"></i>Add to Cart
+</button>
+<button class="btn btn-outline-cyan btn-sm rounded-pill" (click)="veiwproduct(item.id)">
+<i class="fas fa-eye"></i>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- No products found -->
+<div *ngIf="filteredProducts.length === 0" class="text-center py-5">
+<div class="empty-state">
+<i class="fas fa-search fa-4x text-muted mb-3"></i>
+<h3 class="text-muted">No products found</h3>
+<p class="text-muted">Try adjusting your filters or browse all categories</p>
+<button class="btn btn-warning rounded-pill" (click)="filterByCategory('All')">View All Products</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Category Banner -->
+<section class="category-banner py-5">
+<div class="container-fluid px-5">
+<div class="row align-items-center bg-promo rounded-4 p-5">
+<div class="col-lg-8">
+<h2 class="text-white display-6 fw-bold mb-3">Can't Find What You're Looking For?</h2>
+<p class="text-white mb-4">Browse our complete collection or contact us for personalized toy recommendations</p>
+<button class="btn btn-light btn-lg rounded-pill px-5 fw-bold">Contact Us</button>
+</div>
+<div class="col-lg-4 text-center mt-4 mt-lg-0">
+<img src="imgs/photos_gallery_1_9.jpg" alt="Happy Kids" class="img-fluid rounded-3">
+</div>
+</div>
+</div>
+</section>
+</div>

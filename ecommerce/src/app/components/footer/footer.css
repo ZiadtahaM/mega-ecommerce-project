@@ -1,0 +1,396 @@
+/* Footer Styles - RainBow Toys */
+.custom-footer {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f7fa 100%);
+  border-top: 3px solid #00bcd4;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Main footer content */
+.footer-content {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 15px 15px 0 0;
+  position: relative;
+}
+
+/* Rainbow Logo Styling */
+.rainbow-logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.brand-name {
+  background: linear-gradient(45deg, #ff5722, #ffeb3b, #00bcd4, #9c27b0);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: rainbow 3s ease-in-out infinite;
+}
+
+@keyframes rainbow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.brand-description {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Social Media Buttons */
+.social-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  color: white !important;
+}
+
+.social-btn.btn-primary:hover { background-color: #1877f2 !important; }
+.social-btn.btn-info:hover { background-color: #1da1f2 !important; }
+.social-btn.btn-warning:hover { background-color: #e4405f !important; }
+.social-btn.btn-danger:hover { background-color: #bd081c !important; }
+
+/* Footer Titles */
+.footer-title {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.footer-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: linear-gradient(90deg, #00bcd4, #ffeb3b);
+  border-radius: 1px;
+}
+
+/* Footer Links */
+.footer-links {
+  margin: 0;
+}
+
+.footer-link {
+  padding: 0.25rem 0;
+  transition: all 0.3s ease;
+  display: block;
+  border-radius: 4px;
+  padding: 0.5rem 0.5rem;
+  margin: 0.25rem 0;
+}
+
+.footer-link:hover {
+  color: #00bcd4 !important;
+  background-color: rgba(0, 188, 212, 0.1);
+  transform: translateX(5px);
+}
+
+.footer-link i {
+  width: 16px;
+  text-align: center;
+}
+
+/* Store Hours Styling */
+.hours-info {
+  background: rgba(0, 188, 212, 0.1);
+  padding: 0.75rem;
+  border-radius: 8px;
+  border-left: 3px solid #00bcd4;
+}
+
+/* Contact Information */
+.contact-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.contact-item:hover {
+  background-color: rgba(255, 235, 59, 0.1);
+}
+
+.contact-link {
+  transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+  color: #ff5722 !important;
+}
+
+/* Quick Links Buttons */
+.quick-links a {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.quick-links a:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Decorative Section */
+.decorative-section {
+  min-height: 250px;
+  background: linear-gradient(135deg, rgba(255, 235, 59, 0.1) 0%, rgba(0, 188, 212, 0.1) 100%);
+  border-radius: 15px;
+  padding: 1.5rem;
+  border: 2px solid rgba(0, 188, 212, 0.2);
+}
+
+/* Toy Decorations */
+.toy-decorations {
+  position: relative;
+  min-height: 200px;
+}
+
+/* Rocking Horse Animation */
+.rocking-horse {
+  animation: gentleRock 4s ease-in-out infinite;
+}
+
+@keyframes gentleRock {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+/* Colorful Ball Bounce */
+.colorful-ball {
+  animation: gentleBounce 2s ease-in-out infinite;
+}
+
+@keyframes gentleBounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Stacking Toy Float */
+.stacking-toy {
+  animation: gentleFloat 3s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+/* Cylindrical Block Wiggle */
+.cylindrical-block {
+  animation: gentleWiggle 2.5s ease-in-out infinite;
+}
+
+@keyframes gentleWiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(1deg); }
+  75% { transform: rotate(-1deg); }
+}
+
+/* Stars Twinkle */
+.stars-decoration i {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+.stars-decoration i:nth-child(1) { animation-delay: 0s; }
+.stars-decoration i:nth-child(2) { animation-delay: 0.3s; }
+.stars-decoration i:nth-child(3) { animation-delay: 0.6s; }
+.stars-decoration i:nth-child(4) { animation-delay: 0.9s; }
+.stars-decoration i:nth-child(5) { animation-delay: 1.2s; }
+
+/* Bunting Wave */
+.bunting-decoration svg {
+  animation: gentleWave 4s ease-in-out infinite;
+}
+
+@keyframes gentleWave {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+/* Contact Buttons */
+.contact-buttons {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.contact-buttons .btn {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.contact-buttons .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Bottom Footer */
+.footer-bottom {
+  background: linear-gradient(45deg, #2c3e50, #34495e);
+  color: white;
+  border-top: 2px solid #00bcd4;
+}
+
+.footer-bottom a {
+  transition: color 0.3s ease;
+}
+
+.footer-bottom a:hover {
+  color: #ffeb3b !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-content {
+    padding: 2rem 0 !important;
+  }
+  
+  .decorative-section {
+    min-height: 200px;
+    margin-top: 1rem;
+  }
+  
+  .rocking-horse, .colorful-ball, .stacking-toy, .cylindrical-block {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    margin: 0.5rem;
+    display: inline-block;
+  }
+  
+  .toy-decorations {
+    text-align: center;
+    min-height: auto;
+  }
+  
+  .contact-buttons {
+    position: static;
+    margin-top: 1rem;
+  }
+  
+  .stars-decoration, .bunting-decoration {
+    display: none;
+  }
+  
+  .footer-title {
+    font-size: 1rem;
+  }
+  
+  .brand-name {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .rainbow-logo .letter-r,
+  .rainbow-logo .letter-a,
+  .rainbow-logo .letter-i,
+  .rainbow-logo .letter-n,
+  .rainbow-logo .letter-b,
+  .rainbow-logo .letter-o,
+  .rainbow-logo .letter-w {
+    font-size: 1.5rem !important;
+  }
+  
+  .social-btn {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .footer-links {
+    font-size: 0.9rem;
+  }
+  
+  .contact-item {
+    font-size: 0.9rem;
+  }
+}
+
+/* Animation delays for staggered entrance */
+.custom-footer .col-lg-3:nth-child(1) { animation-delay: 0.1s; }
+.custom-footer .col-lg-3:nth-child(2) { animation-delay: 0.2s; }
+.custom-footer .col-lg-3:nth-child(3) { animation-delay: 0.3s; }
+.custom-footer .col-lg-3:nth-child(4) { animation-delay: 0.4s; }
+
+/* Smooth hover transitions */
+.custom-footer * {
+  transition: all 0.3s ease;
+}
+
+/* Footer hover effects */
+.footer-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 188, 212, 0.1);
+}
+
+/* Custom scrollbar for footer (if needed) */
+.footer-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.footer-content::-webkit-scrollbar-track {
+  background: rgba(0, 188, 212, 0.1);
+}
+
+.footer-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #00bcd4, #ffeb3b);
+  border-radius: 3px;
+}
+
+.footer-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #0097a7, #fdd835);
+}
+
+/* Print styles */
+@media print {
+  .custom-footer {
+    display: none;
+  }
+}
+
+/* Dark mode support (if needed) */
+@media (prefers-color-scheme: dark) {
+  .footer-content {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+  }
+  
+  .footer-title,
+  .brand-name {
+    color: white;
+  }
+  
+  .footer-link,
+  .text-muted {
+    color: #bdc3c7 !important;
+  }
+  
+  .decorative-section {
+    background: linear-gradient(135deg, rgba(0, 188, 212, 0.2) 0%, rgba(255, 235, 59, 0.2) 100%);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}

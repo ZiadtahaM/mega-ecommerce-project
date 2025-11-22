@@ -1,1 +1,96 @@
-<p>cart works!</p>
+<div class="cart-container">
+  <div class="container-fluid px-5 py-5">
+    <h1 class="cart-title mb-5">Shopping Cart</h1>
+    
+    @if (api.cart.length === 0) {
+      <div class="empty-cart text-center py-5">
+        <div class="empty-icon mb-4">🛒</div>
+        <h3 class="mb-3">Your cart is empty</h3>
+        <p class="text-muted mb-4">Add some items to get started!</p>
+        <button class="btn btn-warning btn-lg rounded-pill px-5" (click)="continueShopping()">
+          Continue Shopping
+        </button>
+      </div>
+    } @else {
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="cart-items">
+            @for (item of api.cart; track item.id) {
+              <div class="cart-item card mb-3 border-0 shadow-sm">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                      <img [src]="item.images?.[0] || 'https://via.placeholder.com/150'" 
+                           [alt]="item.title" 
+                           class="cart-item-img img-fluid rounded">
+                    </div>
+                    <div class="col-md-4">
+                      <h5 class="cart-item-title">{{item.title}}</h5>
+                      <p class="text-muted small mb-0">{{item.category}}</p>
+                    </div>
+                    <div class="col-md-2 text-center">
+                      <p class="fw-bold mb-0">\${{item.price}}</p>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="quantity-controls d-flex align-items-center justify-content-center">
+                        <button class="btn btn-sm btn-outline-secondary rounded-circle" 
+                                (click)="decreaseQuantity(item)">-</button>
+                        <span class="quantity-value mx-3">{{item.quantity}}</span>
+                        <button class="btn btn-sm btn-outline-secondary rounded-circle" 
+                                (click)="increaseQuantity(item)">+</button>
+                      </div>
+                    </div>
+                    <div class="col-md-2 text-center">
+                      <p class="fw-bold text-danger mb-2">\${{getItemTotal(item) | number:'1.2-2'}}</p>
+                      <button class="btn btn-sm btn-outline-danger rounded-pill" 
+                              (click)="removeItem(item.id)">Remove</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+          
+          <button class="btn btn-outline-secondary btn-lg rounded-pill px-5 mt-3" 
+                  (click)="continueShopping()">
+            ← Continue Shopping
+          </button>
+        </div>
+        
+        <div class="col-lg-4">
+          <div class="cart-summary card border-0 shadow-sm sticky-top">
+            <div class="card-body p-4">
+              <h4 class="mb-4">Order Summary</h4>
+              
+              <div class="d-flex justify-content-between mb-3">
+                <span>Subtotal ({{api.cart.length}} items)</span>
+                <span class="fw-bold">\${{api.getCartTotal() | number:'1.2-2'}}</span>
+              </div>
+              
+              <div class="d-flex justify-content-between mb-3">
+                <span>Shipping</span>
+                <span class="text-success fw-bold">FREE</span>
+              </div>
+              
+              <hr>
+              
+              <div class="d-flex justify-content-between mb-4">
+                <span class="fw-bold fs-5">Total</span>
+                <span class="fw-bold fs-4 text-danger">\${{api.getCartTotal() | number:'1.2-2'}}</span>
+              </div>
+              
+              <button class="btn btn-warning btn-lg w-100 rounded-pill mb-2 fw-bold" 
+                      (click)="checkout()">
+                Proceed to Checkout
+              </button>
+              
+              <div class="text-center mt-3">
+                <small class="text-muted">🔒 Secure checkout</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

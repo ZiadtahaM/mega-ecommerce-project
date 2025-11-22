@@ -1,0 +1,352 @@
+<div class="faq-container">
+  <!-- Hero Section -->
+  <section class="faq-hero py-5">
+    <div class="container-fluid px-5">
+      <div class="row align-items-center py-5">
+        <div class="col-lg-6 col-md-6">
+          <h1 class="hero-title">Frequently Asked Questions</h1>
+          <p class="hero-subtitle">Find answers to common questions about our toys, orders, and policies</p>
+          <a routerLink="/contact" class="btn btn-warning btn-lg rounded-pill px-5 fw-bold text-decoration-none">Still Have Questions?</a>
+        </div>
+        <div class="col-lg-6 col-md-6 text-center">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop" alt="FAQ Support" class="img-fluid rounded-4">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search and Quick Links -->
+  <section class="faq-search py-4">
+    <div class="container-fluid px-5">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <div class="search-box mb-4">
+            <div class="input-group input-group-lg">
+              <input type="text" 
+                     class="form-control rounded-start-pill" 
+                     placeholder="Search for answers..." 
+                     [(ngModel)]="searchTerm"
+                     (input)="onSearchChange()">
+              <button class="btn btn-cyan rounded-end-pill px-4" type="button">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="quick-links">
+            <h5 class="mb-3">Quick Topics</h5>
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+              <button class="btn btn-outline-cyan btn-sm rounded-pill" 
+                      *ngFor="let topic of quickTopics" 
+                      (click)="filterByCategory(topic.key)">
+                {{topic.name}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Categories -->
+  <section class="faq-categories py-5">
+    <div class="container-fluid px-5">
+      <div class="row">
+        <!-- FAQ List -->
+        <div class="col-lg-8">
+          <div class="faq-list">
+            <!-- Orders & Shipping -->
+            <div class="category-section mb-5" *ngIf="filteredFaqs.orders.length > 0">
+              <h3 class="category-title mb-4">
+                <i class="fas fa-shopping-cart me-2 text-cyan"></i>
+                Orders & Shipping
+              </h3>
+              <div class="accordion" id="ordersAccordion">
+                <div class="accordion-item" *ngFor="let faq of filteredFaqs.orders; let i = index">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" 
+                            type="button" 
+                            [attr.data-bs-toggle]="'collapse'" 
+                            [attr.data-bs-target]="'#orders-' + i">
+                      {{faq.question}}
+                    </button>
+                  </h2>
+                  <div [id]="'orders-' + i" 
+                       class="accordion-collapse collapse" 
+                       [attr.data-bs-parent]="'#ordersAccordion'">
+                    <div class="accordion-body">
+                      <p>{{faq.answer}}</p>
+                      <div class="helpful-section mt-3" *ngIf="faq.helpful">
+                        <small class="text-muted">Was this helpful?</small>
+                        <div class="btn-group btn-group-sm ms-2">
+                          <button class="btn btn-outline-success" (click)="markHelpful(faq.id, true)">
+                            <i class="fas fa-thumbs-up"></i>
+                          </button>
+                          <button class="btn btn-outline-danger" (click)="markHelpful(faq.id, false)">
+                            <i class="fas fa-thumbs-down"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Products & Safety -->
+            <div class="category-section mb-5" *ngIf="filteredFaqs.products.length > 0">
+              <h3 class="category-title mb-4">
+                <i class="fas fa-shield-alt me-2 text-cyan"></i>
+                Products & Safety
+              </h3>
+              <div class="accordion" id="productsAccordion">
+                <div class="accordion-item" *ngFor="let faq of filteredFaqs.products; let i = index">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" 
+                            type="button" 
+                            [attr.data-bs-toggle]="'collapse'" 
+                            [attr.data-bs-target]="'#products-' + i">
+                      {{faq.question}}
+                    </button>
+                  </h2>
+                  <div [id]="'products-' + i" 
+                       class="accordion-collapse collapse" 
+                       [attr.data-bs-parent]="'#productsAccordion'">
+                    <div class="accordion-body">
+                      <p>{{faq.answer}}</p>
+                      <div class="helpful-section mt-3" *ngIf="faq.helpful">
+                        <small class="text-muted">Was this helpful?</small>
+                        <div class="btn-group btn-group-sm ms-2">
+                          <button class="btn btn-outline-success" (click)="markHelpful(faq.id, true)">
+                            <i class="fas fa-thumbs-up"></i>
+                          </button>
+                          <button class="btn btn-outline-danger" (click)="markHelpful(faq.id, false)">
+                            <i class="fas fa-thumbs-down"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Returns & Exchanges -->
+            <div class="category-section mb-5" *ngIf="filteredFaqs.returns.length > 0">
+              <h3 class="category-title mb-4">
+                <i class="fas fa-undo me-2 text-cyan"></i>
+                Returns & Exchanges
+              </h3>
+              <div class="accordion" id="returnsAccordion">
+                <div class="accordion-item" *ngFor="let faq of filteredFaqs.returns; let i = index">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" 
+                            type="button" 
+                            [attr.data-bs-toggle]="'collapse'" 
+                            [attr.data-bs-target]="'#returns-' + i">
+                      {{faq.question}}
+                    </button>
+                  </h2>
+                  <div [id]="'returns-' + i" 
+                       class="accordion-collapse collapse" 
+                       [attr.data-bs-parent]="'#returnsAccordion'">
+                    <div class="accordion-body">
+                      <p>{{faq.answer}}</p>
+                      <div class="helpful-section mt-3" *ngIf="faq.helpful">
+                        <small class="text-muted">Was this helpful?</small>
+                        <div class="btn-group btn-group-sm ms-2">
+                          <button class="btn btn-outline-success" (click)="markHelpful(faq.id, true)">
+                            <i class="fas fa-thumbs-up"></i>
+                          </button>
+                          <button class="btn btn-outline-danger" (click)="markHelpful(faq.id, false)">
+                            <i class="fas fa-thumbs-down"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Account & Payment -->
+            <div class="category-section mb-5" *ngIf="filteredFaqs.payment.length > 0">
+              <h3 class="category-title mb-4">
+                <i class="fas fa-credit-card me-2 text-cyan"></i>
+                Account & Payment
+              </h3>
+              <div class="accordion" id="paymentAccordion">
+                <div class="accordion-item" *ngFor="let faq of filteredFaqs.payment; let i = index">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" 
+                            type="button" 
+                            [attr.data-bs-toggle]="'collapse'" 
+                            [attr.data-bs-target]="'#payment-' + i">
+                      {{faq.question}}
+                    </button>
+                  </h2>
+                  <div [id]="'payment-' + i" 
+                       class="accordion-collapse collapse" 
+                       [attr.data-bs-parent]="'#paymentAccordion'">
+                    <div class="accordion-body">
+                      <p>{{faq.answer}}</p>
+                      <div class="helpful-section mt-3" *ngIf="faq.helpful">
+                        <small class="text-muted">Was this helpful?</small>
+                        <div class="btn-group btn-group-sm ms-2">
+                          <button class="btn btn-outline-success" (click)="markHelpful(faq.id, true)">
+                            <i class="fas fa-thumbs-up"></i>
+                          </button>
+                          <button class="btn btn-outline-danger" (click)="markHelpful(faq.id, false)">
+                            <i class="fas fa-thumbs-down"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- No Results Message -->
+            <div *ngIf="!hasAnyResults()" class="text-center py-5">
+              <div class="empty-state">
+                <i class="fas fa-search fa-4x text-muted mb-3"></i>
+                <h3 class="text-muted">No results found</h3>
+                <p class="text-muted">Try adjusting your search terms or browse our categories</p>
+                <button class="btn btn-cyan rounded-pill" (click)="clearSearch()">Clear Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+          <div class="faq-sidebar">
+            <!-- Contact Card -->
+            <div class="card border-0 shadow-sm mb-4">
+              <div class="card-body p-4 text-center">
+                <div class="contact-icon mb-3">
+                  <i class="fas fa-headset fa-3x text-cyan"></i>
+                </div>
+                <h5 class="fw-bold mb-3">Need More Help?</h5>
+                <p class="text-muted mb-4">Our support team is here to assist you</p>
+                <a routerLink="/contact" class="btn btn-warning btn-sm rounded-pill px-4">Contact Support</a>
+              </div>
+            </div>
+
+            <!-- Popular Topics -->
+            <div class="card border-0 shadow-sm mb-4">
+              <div class="card-body p-4">
+                <h5 class="fw-bold mb-3">
+                  <i class="fas fa-fire text-warning me-2"></i>
+                  Popular Topics
+                </h5>
+                <ul class="list-unstyled">
+                  <li class="mb-2">
+                    <a href="#" class="text-decoration-none" (click)="filterByCategory('orders')">
+                      <i class="fas fa-chevron-right text-cyan me-2"></i>Track Your Order
+                    </a>
+                  </li>
+                  <li class="mb-2">
+                    <a href="#" class="text-decoration-none" (click)="filterByCategory('returns')">
+                      <i class="fas fa-chevron-right text-cyan me-2"></i>Return Policy
+                    </a>
+                  </li>
+                  <li class="mb-2">
+                    <a href="#" class="text-decoration-none" (click)="filterByCategory('products')">
+                      <i class="fas fa-chevron-right text-cyan me-2"></i>Toy Safety
+                    </a>
+                  </li>
+                  <li class="mb-2">
+                    <a href="#" class="text-decoration-none" (click)="filterByCategory('payment')">
+                      <i class="fas fa-chevron-right text-cyan me-2"></i>Payment Methods
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Store Hours -->
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-4 text-center">
+                <h5 class="fw-bold mb-3">
+                  <i class="fas fa-clock text-cyan me-2"></i>
+                  Customer Service Hours
+                </h5>
+                <div class="hours-list">
+                  <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">Monday - Friday</span>
+                    <span class="fw-bold">9AM - 6PM</span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">Saturday</span>
+                    <span class="fw-bold">10AM - 5PM</span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">Sunday</span>
+                    <span class="text-muted">Closed</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Help Resources -->
+  <section class="help-resources py-5">
+    <div class="container-fluid px-5">
+      <h2 class="text-center section-title mb-5">More Help Resources</h2>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="help-card text-center p-4 rounded-4 shadow-sm">
+            <div class="help-icon mb-3">
+              <i class="fas fa-video fa-3x text-cyan"></i>
+            </div>
+            <h5 class="fw-bold mb-3">Video Tutorials</h5>
+            <p class="text-muted mb-4">Learn how to use and care for your toys with our step-by-step videos</p>
+            <a href="#" class="btn btn-outline-cyan rounded-pill">Watch Videos</a>
+          </div>
+        </div>
+        <div class="col">
+          <div class="help-card text-center p-4 rounded-4 shadow-sm">
+            <div class="help-icon mb-3">
+              <i class="fas fa-download fa-3x text-cyan"></i>
+            </div>
+            <h5 class="fw-bold mb-3">User Manuals</h5>
+            <p class="text-muted mb-4">Download instruction manuals and safety guides for all our products</p>
+            <a href="#" class="btn btn-outline-cyan rounded-pill">Download PDFs</a>
+          </div>
+        </div>
+        <div class="col">
+          <div class="help-card text-center p-4 rounded-4 shadow-sm">
+            <div class="help-icon mb-3">
+              <i class="fas fa-comments fa-3x text-cyan"></i>
+            </div>
+            <h5 class="fw-bold mb-3">Community Forum</h5>
+            <p class="text-muted mb-4">Connect with other parents and get advice from our community</p>
+            <a href="#" class="btn btn-outline-cyan rounded-pill">Join Forum</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section py-5">
+    <div class="container-fluid px-5">
+      <div class="newsletter-box text-center p-5 rounded-4">
+        <h2 class="text-white mb-3 fw-bold">Stay Informed</h2>
+        <p class="text-white mb-4">Get toy safety tips, new arrivals, and exclusive offers</p>
+        <form class="newsletter-form mx-auto" style="max-width: 600px;" (submit)="subscribeNewsletter($event)">
+          <div class="input-group input-group-lg">
+            <input type="email" class="form-control rounded-start-pill" placeholder="Enter your email" required>
+            <button class="btn btn-warning rounded-end-pill px-5 fw-bold" type="submit">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>

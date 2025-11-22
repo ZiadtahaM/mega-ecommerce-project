@@ -1,3 +1,13 @@
+/**
+ * @file notfound.ts
+ * @description Component for RainBow Toys Angular E-commerce Platform
+ * @path src/app/components/notfound
+ * @author Your Name
+ * @date 2025-11-20
+ * @project RainBow Toys
+ */
+
+
 import { Component } from '@angular/core';
 
 @Component({

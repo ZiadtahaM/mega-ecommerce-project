@@ -1,1 +1,264 @@
-<p>footer works!</p>
+<!-- Footer Section -->
+<footer class="custom-footer mt-5">
+  <!-- Main Footer Content -->
+  <section class="footer-content py-5">
+    <div class="container-fluid px-5">
+      <div class="row align-items-start">
+        
+        <!-- Brand & Social Section -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="brand-section">
+            <!-- Rainbow Logo -->
+            <div class="logo-container mb-3">
+              <div class="rainbow-logo">
+                <span class="letter-r text-danger fw-bold fs-1">R</span>
+                <span class="letter-a text-warning fw-bold fs-1">a</span>
+                <span class="letter-i text-warning fw-bold fs-1">i</span>
+                <span class="letter-n text-success fw-bold fs-1">n</span>
+                <span class="letter-b text-info fw-bold fs-1">b</span>
+                <span class="letter-o text-info fw-bold fs-1">o</span>
+                <span class="letter-w text-primary fw-bold fs-1">o</span>
+                <span class="letter-w text-primary fw-bold fs-1">w</span>
+              </div>
+            </div>
+            <h4 class="brand-name text-dark fw-bold mb-2">RainBow Toys</h4>
+            <p class="brand-description text-muted mb-3">Premium baby toys designed for safety, creativity, and endless joy in every playtime.</p>
+            
+            <!-- Social Media Icons -->
+            <div class="social-media">
+              <h6 class="text-dark fw-bold mb-2">Follow Us</h6>
+              <div class="d-flex gap-2">
+                <button class="social-btn btn btn-primary rounded-circle" (click)="openFacebook()">
+                  <i class="fab fa-facebook-f"></i>
+                </button>
+                <button class="social-btn btn btn-info rounded-circle" (click)="openTwitter()">
+                  <i class="fab fa-twitter"></i>
+                </button>
+                <button class="social-btn btn btn-warning rounded-circle" (click)="openInstagram()">
+                  <i class="fab fa-instagram"></i>
+                </button>
+                <button class="social-btn btn btn-danger rounded-circle" (click)="openPinterest()">
+                  <i class="fab fa-pinterest"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- My Account Section -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="account-section">
+            <h5 class="footer-title text-dark fw-bold mb-3">
+              <i class="fas fa-user me-2 text-cyan"></i>My Account
+            </h5>
+            <ul class="footer-links list-unstyled">
+              <li class="mb-2">
+                <a href="#" class="footer-link text-muted text-decoration-none" (click)="navigateToSection('track-order')">
+                  <i class="fas fa-truck me-2"></i>Track My Order
+                </a>
+              </li>
+              <li class="mb-2">
+                <a href="#" class="footer-link text-muted text-decoration-none" (click)="navigateToSection('terms')">
+                  <i class="fas fa-file-contract me-2"></i>Terms of Use
+                </a>
+              </li>
+              <li class="mb-2">
+                <a href="#" class="footer-link text-muted text-decoration-none" (click)="navigateToSection('wishlist')">
+                  <i class="fas fa-heart me-2"></i>Wishlist
+                </a>
+              </li>
+              <li class="mb-2">
+                <a href="#" class="footer-link text-muted text-decoration-none" (click)="navigateToSection('feedback')">
+                  <i class="fas fa-comment-dots me-2"></i>Submit Your Feedback
+                </a>
+              </li>
+              <li class="mb-2">
+                <a href="#" class="footer-link text-muted text-decoration-none" (click)="navigateToSection('login')">
+                  <i class="fas fa-sign-in-alt me-2"></i>Login / Register
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Customer Service Section -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="service-section">
+            <h5 class="footer-title text-dark fw-bold mb-3">
+              <i class="fas fa-headset me-2 text-cyan"></i>Customer Service
+            </h5>
+            
+            <!-- Store Hours -->
+            <div class="store-hours mb-3">
+              <h6 class="text-dark fw-bold mb-2">Store Hours</h6>
+              <div class="hours-info">
+                <p class="text-muted mb-1">
+                  <i class="fas fa-calendar-day me-2"></i>Monday to Friday
+                </p>
+                <p class="text-cyan fw-bold mb-1">10am - 6pm (EST)</p>
+                <p class="text-muted mb-1">
+                  <i class="fas fa-calendar-day me-2"></i>Saturday
+                </p>
+                <p class="text-cyan fw-bold mb-1">11am - 4pm</p>
+                <p class="text-muted mb-1">
+                  <i class="fas fa-calendar-day me-2"></i>Sunday
+                </p>
+                <p class="text-muted">Closed</p>
+              </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="contact-info">
+              <h6 class="text-dark fw-bold mb-2">Contact Us</h6>
+              <div class="contact-item mb-2">
+                <i class="fas fa-phone text-cyan me-2"></i>
+                <a href="tel:+1-123-456-7890" class="contact-link text-decoration-none">
+                  <span class="text-cyan fw-bold">Call us: 123-456-7890</span>
+                </a>
+              </div>
+              <div class="contact-item mb-3">
+                <i class="fas fa-envelope text-cyan me-2"></i>
+                <a href="mailto:info@rainbowtoys.com" class="contact-link text-decoration-none">
+                  <span class="text-cyan fw-bold">Email us: info@rainbowtoys.com</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="quick-links">
+              <a href="#" class="btn btn-outline-cyan btn-sm rounded-pill me-2" (click)="navigateToSection('contact')">
+                Contact Support
+              </a>
+              <a href="#" class="btn btn-outline-warning btn-sm rounded-pill" (click)="navigateToSection('faq')">
+                FAQ
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decorative Section -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="decorative-section position-relative">
+            <h5 class="footer-title text-dark fw-bold mb-3">
+              <i class="fas fa-star me-2 text-warning"></i>Toys & Fun
+            </h5>
+            
+            <!-- Toy Decorations -->
+            <div class="toy-decorations">
+              <!-- Rocking Horse -->
+              <div class="rocking-horse position-absolute" style="top: 0; right: 10px; z-index: 1;">
+                <svg width="80" height="60" viewBox="0 0 80 60">
+                  <!-- Rocking base -->
+                  <ellipse cx="40" cy="55" rx="30" ry="8" fill="#00bcd4" opacity="0.3"/>
+                  <path d="M15 50 Q20 45 25 50 Q30 55 35 50 Q40 45 45 50 Q50 55 55 50 Q60 45 65 50" 
+                        stroke="#00bcd4" stroke-width="3" fill="none"/>
+                  
+                  <!-- Horse body -->
+                  <ellipse cx="40" cy="35" rx="25" ry="15" fill="#ffeb3b"/>
+                  <!-- Horse head -->
+                  <ellipse cx="60" cy="30" rx="12" ry="8" fill="#ffeb3b"/>
+                  <!-- Horse eye -->
+                  <circle cx="62" cy="28" r="2" fill="#333"/>
+                  <!-- Horse legs -->
+                  <rect x="25" y="45" width="3" height="8" fill="#ffeb3b"/>
+                  <rect x="35" y="45" width="3" height="8" fill="#ffeb3b"/>
+                  <rect x="45" y="45" width="3" height="8" fill="#ffeb3b"/>
+                  <rect x="55" y="45" width="3" height="8" fill="#ffeb3b"/>
+                </svg>
+              </div>
+
+              <!-- Colorful Ball -->
+              <div class="colorful-ball position-absolute" style="top: 45px; right: 5px;">
+                <svg width="20" height="20" viewBox="0 0 20 20">
+                  <circle cx="10" cy="10" r="8" fill="#ff5722"/>
+                  <path d="M10 2 A8 8 0 0 1 10 18 A8 8 0 0 1 10 2" fill="#ffeb3b"/>
+                  <path d="M2 10 A8 8 0 0 1 18 10 A8 8 0 0 1 2 10" fill="#00bcd4"/>
+                </svg>
+              </div>
+
+              <!-- Stacking Toy -->
+              <div class="stacking-toy position-absolute" style="top: 35px; right: 25px;">
+                <svg width="15" height="25" viewBox="0 0 15 25">
+                  <ellipse cx="7.5" cy="22" rx="6" ry="2" fill="#ffeb3b"/>
+                  <rect x="2" y="18" width="11" height="4" rx="2" fill="#ffeb3b"/>
+                  <ellipse cx="7.5" cy="15" rx="5" ry="2" fill="#00bcd4"/>
+                  <rect x="3" y="11" width="9" height="4" rx="2" fill="#00bcd4"/>
+                  <ellipse cx="7.5" cy="8" rx="4" ry="2" fill="#ff5722"/>
+                  <rect x="4" y="4" width="7" height="4" rx="2" fill="#ff5722"/>
+                </svg>
+              </div>
+
+              <!-- Cylindrical Block -->
+              <div class="cylindrical-block position-absolute" style="top: 55px; right: 20px;">
+                <svg width="12" height="18" viewBox="0 0 12 18">
+                  <ellipse cx="6" cy="3" rx="5" ry="2" fill="#9c27b0"/>
+                  <rect x="1" y="3" width="10" height="12" fill="#9c27b0"/>
+                  <ellipse cx="6" cy="15" rx="5" ry="2" fill="#9c27b0"/>
+                </svg>
+              </div>
+
+              <!-- Stars decoration -->
+              <div class="stars-decoration position-absolute" style="top: 0; left: 0;">
+                <i class="fas fa-star text-warning position-absolute" style="top: 5px; left: 10px; font-size: 12px; opacity: 0.7;"></i>
+                <i class="fas fa-star text-warning position-absolute" style="top: 15px; left: 25px; font-size: 10px; opacity: 0.8;"></i>
+                <i class="fas fa-star text-warning position-absolute" style="top: 8px; left: 40px; font-size: 8px; opacity: 0.6;"></i>
+                <i class="fas fa-star text-warning position-absolute" style="top: 20px; left: 50px; font-size: 11px; opacity: 0.9;"></i>
+                <i class="fas fa-star text-warning position-absolute" style="top: 12px; left: 65px; font-size: 9px; opacity: 0.5;"></i>
+              </div>
+
+              <!-- Bunting decoration -->
+              <div class="bunting-decoration position-absolute" style="top: -5px; right: 15px;">
+                <svg width="60" height="30" viewBox="0 0 60 30">
+                  <!-- Flag string -->
+                  <path d="M5 5 Q30 15 55 5" stroke="#333" stroke-width="1" fill="none"/>
+                  <!-- Flag triangles -->
+                  <polygon points="15,5 18,5 16.5,12" fill="#ff5722"/>
+                  <polygon points="25,7 28,7 26.5,14" fill="#ffeb3b"/>
+                  <polygon points="35,9 38,9 36.5,16" fill="#00bcd4"/>
+                  <polygon points="45,7 48,7 46.5,14" fill="#9c27b0"/>
+                </svg>
+              </div>
+
+              <!-- Contact buttons -->
+              <div class="contact-buttons mt-4 pt-3">
+                <a href="tel:+1-123-456-7890" class="btn btn-cyan btn-sm rounded-pill me-2">
+                  <i class="fas fa-phone me-1"></i>Call Now
+                </a>
+                <a href="mailto:info@rainbowtoys.com" class="btn btn-warning btn-sm rounded-pill">
+                  <i class="fas fa-envelope me-1"></i>Email Us
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom Footer -->
+  <section class="footer-bottom py-3" style="background: linear-gradient(45deg, #f8f9fa, #e9ecef);">
+    <div class="container-fluid px-5">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <p class="text-muted mb-0">
+            © {{getCurrentYear()}} RainBow Toys. All rights reserved. | 
+            <span class="text-cyan">Premium Baby Toys & Safety First</span>
+          </p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <div class="footer-bottom-links">
+            <a href="#" class="text-muted text-decoration-none me-3" (click)="navigateToSection('privacy')">
+              Privacy Policy
+            </a>
+            <a href="#" class="text-muted text-decoration-none me-3" (click)="navigateToSection('shipping')">
+              Shipping Info
+            </a>
+            <a href="#" class="text-muted text-decoration-none" (click)="navigateToSection('returns')">
+              Returns
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</footer>

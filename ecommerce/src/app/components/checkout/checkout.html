@@ -1,1 +1,138 @@
-<p>checkout works!</p>
+<div class="checkout-container">
+  <div class="breadcrumb">
+    <a routerLink="/">Home</a> / Checkout
+  </div>
+  
+  <h1>Check out</h1>
+  
+  <div class="checkout-grid">
+    <!-- Left Side: Delivery Info -->
+    <div class="delivery-section">
+      <h2>Delivery info</h2>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label>First name *</label>
+          <input type="text" [(ngModel)]="firstName" placeholder="John">
+        </div>
+        
+        <div class="form-group">
+          <label>Last name *</label>
+          <input type="text" [(ngModel)]="lastName" placeholder="Gray">
+        </div>
+      </div>
+      
+      <div class="form-group full-width">
+        <label>Street address *</label>
+        <input type="text" [(ngModel)]="streetAddress" placeholder="Address">
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label>Town / City *</label>
+          <select [(ngModel)]="townCity">
+            <option value="">City</option>
+            <option value="Cairo">Cairo</option>
+            <option value="Alexandria">Alexandria</option>
+            <option value="Giza">Giza</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>State *</label>
+          <select [(ngModel)]="state">
+            <option value="">State</option>
+            <option value="Cairo">Cairo</option>
+            <option value="Alexandria">Alexandria</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label>ZIP code *</label>
+          <input type="text" [(ngModel)]="zipCode" placeholder="Zip code">
+        </div>
+        
+        <div class="form-group">
+          <label>Phone *</label>
+          <input type="tel" [(ngModel)]="phone" placeholder="(123) 456-7890">
+        </div>
+      </div>
+      
+      <div class="form-group full-width">
+        <label>Email address *</label>
+        <input type="email" [(ngModel)]="email" placeholder="Example@yourmail.com">
+      </div>
+      
+      <div class="form-group full-width">
+        <label>Order notes (optional)</label>
+        <textarea [(ngModel)]="orderNotes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+      </div>
+      
+      <!-- Payment Section -->
+      <div class="payment-section">
+        <h2>Payment</h2>
+        <p class="payment-subtitle">All transactions are secure and encrypted.</p>
+        
+        <div class="payment-option">
+          <input type="radio" name="payment" id="card" checked>
+          <label for="card">
+            Credit card
+            <div class="card-icons">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" width="40">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" width="40">
+            </div>
+          </label>
+        </div>
+        
+        <div class="card-details">
+          <input type="text" placeholder="Card number">
+          <input type="text" placeholder="Name on card">
+          <div class="card-row">
+            <input type="text" placeholder="Expiration date (MM/YY)">
+            <input type="text" placeholder="Security code">
+          </div>
+        </div>
+        
+        <div class="payment-option">
+          <input type="radio" name="payment" id="paypal">
+          <label for="paypal">PayPal</label>
+        </div>
+        
+        <button class="place-order-btn" (click)="placeOrder()">Place order</button>
+      </div>
+    </div>
+    
+    <!-- Right Side: Order Summary -->
+    <div class="order-summary">
+      <h2>Your order</h2>
+      
+      <div class="order-items">
+        <div class="order-item" *ngFor="let item of api.cart">
+          <img [src]="item.thumbnail" [alt]="item.title">
+          <div class="item-details">
+            <p class="item-name">{{ item.title }}</p>
+            <p class="item-amount">Amount: {{ item.quantity }}</p>
+          </div>
+          <p class="item-price">${{ item.price * item.quantity }}</p>
+        </div>
+      </div>
+      
+      <div class="order-totals">
+        <div class="total-row">
+          <span>Subtotal</span>
+          <span>${{ subtotal.toFixed(2) }}</span>
+        </div>
+        <div class="total-row">
+          <span>Shipping</span>
+          <span>${{ shipping.toFixed(2) }}</span>
+        </div>
+        <div class="total-row final">
+          <span>Total</span>
+          <span>${{ total.toFixed(2) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

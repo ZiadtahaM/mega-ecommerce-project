@@ -1,0 +1,140 @@
+<div class="admin-page">
+  <h1>Admin Dashboard</h1>
+  
+  <!-- Stats -->
+  <div class="stats">
+    <div class="card">
+      <h3>Total</h3>
+      <p>{{ totalProducts }}</p>
+    </div>
+    <div class="card">
+      <h3>Active</h3>
+      <p>{{ activeProducts }}</p>
+    </div>
+    <div class="card">
+      <h3>Inactive</h3>
+      <p>{{ inactiveProducts }}</p>
+    </div>
+  </div>
+  
+  <!-- Add Button -->
+  <button class="btn-add" (click)="openAddForm()">+ Add New Product</button>
+  
+  <!-- ADD FORM MODAL -->
+  <div class="modal" *ngIf="showAddForm">
+    <div class="modal-content">
+      <h2>Add New Product</h2>
+      
+      <div class="form-group">
+        <label>Title *</label>
+        <input type="text" [(ngModel)]="newProduct.title" placeholder="Enter product title">
+      </div>
+      
+      <div class="form-group">
+        <label>Price *</label>
+        <input type="number" [(ngModel)]="newProduct.price" placeholder="Enter price">
+      </div>
+      
+      <div class="form-group">
+        <label>Brand</label>
+        <input type="text" [(ngModel)]="newProduct.brand" placeholder="Enter brand">
+      </div>
+      
+      <div class="form-group">
+        <label>Category</label>
+        <input type="text" [(ngModel)]="newProduct.category" placeholder="Enter category">
+      </div>
+      
+      <div class="form-group">
+        <label>Stock *</label>
+        <input type="number" [(ngModel)]="newProduct.stock" placeholder="Enter stock quantity">
+      </div>
+      
+      <div class="form-group">
+        <label>Description</label>
+        <textarea [(ngModel)]="newProduct.description" placeholder="Enter description"></textarea>
+      </div>
+      
+      <div class="form-actions">
+        <button class="btn-save" (click)="addProduct()">Add Product</button>
+        <button class="btn-cancel" (click)="closeAddForm()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- EDIT FORM MODAL -->
+  <div class="modal" *ngIf="showEditForm && editingProduct">
+    <div class="modal-content">
+      <h2>Edit Product</h2>
+      
+      <div class="form-group">
+        <label>Title *</label>
+        <input type="text" [(ngModel)]="editingProduct.title">
+      </div>
+      
+      <div class="form-group">
+        <label>Price *</label>
+        <input type="number" [(ngModel)]="editingProduct.price">
+      </div>
+      
+      <div class="form-group">
+        <label>Brand</label>
+        <input type="text" [(ngModel)]="editingProduct.brand">
+      </div>
+      
+      <div class="form-group">
+        <label>Category</label>
+        <input type="text" [(ngModel)]="editingProduct.category">
+      </div>
+      
+      <div class="form-group">
+        <label>Stock *</label>
+        <input type="number" [(ngModel)]="editingProduct.stock">
+      </div>
+      
+      <div class="form-group">
+        <label>Description</label>
+        <textarea [(ngModel)]="editingProduct.description"></textarea>
+      </div>
+      
+      <div class="form-actions">
+        <button class="btn-save" (click)="updateProduct()">Save Changes</button>
+        <button class="btn-cancel" (click)="closeEditForm()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- PRODUCTS TABLE -->
+  <h2>Products</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of products">
+        <td><img [src]="p.thumbnail" width="50"></td>
+        <td>{{ p.title }}</td>
+        <td>{{ p.brand }}</td>
+        <td>${{ p.price }}</td>
+        <td>{{ p.stock }}</td>
+        <td>
+          <span [class.active]="p.stock > 0" [class.inactive]="p.stock === 0">
+            {{ p.stock > 0 ? 'Active' : 'Inactive' }}
+          </span>
+        </td>
+        <td>
+          <button class="btn-edit" (click)="openEditForm(p)">Edit</button>
+          <button class="btn-delete" (click)="deleteProduct(p.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

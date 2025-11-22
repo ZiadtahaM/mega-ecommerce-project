@@ -1,1 +1,219 @@
-<p>home works!</p>
+<div class="home-container">
+  <section class="hero-section">
+    <div class="container-fluid px-5">
+      <div class="row align-items-center py-5">
+        <div class="col-lg-6 col-md-6">
+          <h1 class="hero-title">Play, learn, & grow!</h1>
+          <p class="hero-subtitle">Support your child on their developmental journey</p>
+          <a routerLink="/products" class="btn btn-warning btn-lg rounded-pill px-5 fw-bold text-decoration-none">Shop Now</a>
+        </div>
+        <div class="col-lg-6 col-md-6 text-center">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop" alt="Baby playing" class="img-fluid rounded-4">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="category-section py-5">
+    <div class="container-fluid px-5">
+      <h2 class="text-center section-title mb-5">Find the Perfect Toy</h2>
+      <div class="row g-4">
+        <div class="col">
+          <a routerLink="/products" class="text-decoration-none">
+            <div class="category-card text-center">
+              <div class="category-icon-circle mx-auto mb-3">
+                <img src="https://images.unsplash.com/photo-1601758124164-3b5c27345a1f?w=150&h=150&fit=crop" alt="Building Blocks" class="img-fluid rounded-circle category-image">
+              </div>
+              <p class="category-label">Building & Construction</p>
+            </div>
+          </a>
+        </div>
+        <div class="col">
+          <a routerLink="/products" class="text-decoration-none">
+            <div class="category-card text-center">
+              <div class="category-icon-circle mx-auto mb-3">
+                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=150&h=150&fit=crop" alt="Toy Vehicles" class="img-fluid rounded-circle category-image">
+              </div>
+              <p class="category-label">Toy Vehicles</p>
+            </div>
+          </a>
+        </div>
+        <div class="col">
+          <a routerLink="/products" class="text-decoration-none">
+            <div class="category-card text-center">
+              <div class="category-icon-circle mx-auto mb-3">
+                <img src="https://images.unsplash.com/photo-1566944760747-5f93f54a6dc4?w=150&h=150&fit=crop" alt="Educational Toys" class="img-fluid rounded-circle category-image">
+              </div>
+              <p class="category-label">Educational Toys</p>
+            </div>
+          </a>
+        </div>
+        <div class="col">
+          <a routerLink="/products" class="text-decoration-none">
+            <div class="category-card text-center">
+              <div class="category-icon-circle mx-auto mb-3">
+                <img src="https://images.unsplash.com/photo-1503457574464-49f0b8b5d76e?w=150&h=150&fit=crop" alt="Baby Soft Toys" class="img-fluid rounded-circle category-image">
+              </div>
+              <p class="category-label">Baby & Toddler Toys</p>
+            </div>
+          </a>
+        </div>
+        <div class="col">
+          <a routerLink="/products" class="text-decoration-none">
+            <div class="category-card text-center">
+              <div class="category-icon-circle mx-auto mb-3">
+                <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=150&h=150&fit=crop" alt="Outdoor Play" class="img-fluid rounded-circle category-image">
+              </div>
+              <p class="category-label">Outdoor Play</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="products-section py-5">
+    <div class="container-fluid px-5">
+      <div class="d-flex justify-content-between align-items-center mb-5 flex-wrap gap-3">
+        <h2 class="section-title mb-0">Toy picks for your little ones</h2>
+      
+      </div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <div class="col" *ngFor="let item of productss; track $index">
+          <div class="card product-card h-100 border-0 shadow-sm">
+            <div class="position-relative product-img-wrapper">
+              <img [src]="item.images?.[0]" class="card-img-top" [alt]="item.title" (click)="veiwproduct(item.id)" style="cursor: pointer;">
+              <span *ngIf="item.discountPercentage > 0" class="badge bg-danger position-absolute discount-badge">-{{item.discountPercentage | number:'1.0-0'}}%</span>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <p class="text-uppercase text-muted small mb-2">{{item.tags?.[0] || item.category}}</p>
+              <h5 class="card-title product-title mb-3">{{item.title}}</h5>
+              <div class="d-flex align-items-center mb-3">
+                <div class="stars me-2">
+                  <span class="star" *ngFor="let star of [1,2,3,4,5]" [class.filled]="star <= item.rating">★</span>
+                </div>
+                <span class="rating-text">{{item.rating}}</span>
+              </div>
+              <div class="mt-auto">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <div *ngIf="item.discountPercentage > 0" class="text-muted text-decoration-line-through small">${{item.price}}</div>
+                    <div class="text-danger fw-bold fs-5">
+                      ${{item.discountPercentage > 0 ? (item.price * (1 - item.discountPercentage/100) | number:'1.2-2') : item.price}}
+                    </div>
+                  </div>
+                  <button class="btn btn-success btn-sm rounded-pill px-3" (click)="addTocCart(item)">Add to Cart</button>
+                  <button class="btn btn-success btn-sm rounded-pill px-3" (click)="veiwproduct(item.id)">View</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <a routerLink="/products" class="btn btn-warning btn-lg rounded-pill px-5 fw-bold">View All Products</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="promo-banner py-5">
+    <div class="container-fluid px-5">
+      <div class="row align-items-center bg-promo rounded-4 p-5">
+        <div class="col-lg-7 col-md-6">
+          <h2 class="text-white display-5 fw-bold mb-4">Discover the joy of Ship of Toys</h2>
+          <a routerLink="/products" class="btn btn-light btn-lg rounded-pill px-5 fw-bold text-decoration-none">Shop Now</a>
+        </div>
+        <div class="col-lg-5 col-md-6 text-center mt-4 mt-md-0">
+          <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&h=400&fit=crop" alt="Toy collection" class="img-fluid rounded-3">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews-section py-5">
+    <div class="container-fluid px-5">
+      <h2 class="text-center section-title mb-2">Customer Loves</h2>
+      <p class="text-center text-muted mb-5">Our customers say about toys</p>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="col" *ngFor="let review of productss; track $index">
+          <div class="card review-card h-100 border-0 shadow-sm">
+            <div class="card-body">
+              <div class="stars-review mb-3">★★★★★</div>
+              <p class="card-text review-text mb-4">{{review.comment || 'Great quality toys that my children love!'}}</p>
+              <div class="d-flex align-items-center mt-auto">
+                <div class="reviewer-avatar me-3">{{review.name?.[0] || 'A'}}</div>
+                <div>
+                  <p class="mb-0 fw-semibold">{{review.name || 'Anonymous'}}</p>
+                  <small class="text-muted">{{review.date || '2025-01-01'}}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="photos-section py-5">
+    <div class="container-fluid px-5">
+      <h2 class="text-center section-title mb-5">Recent photoshoots</h2>
+      <div class="row row-cols-2 row-cols-lg-4 g-3">
+        <div class="col">
+          <img src="https://images.unsplash.com/photo-1566944760747-5f93f54a6dc4?w=300&h=200&fit=crop" alt="Kids playing" class="img-fluid rounded-3 photo-item w-100">
+        </div>
+        <div class="col">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=300&h=200&fit=crop" alt="Baby with educational toys" class="img-fluid rounded-3 photo-item w-100">
+        </div>
+        <div class="col">
+          <img src="https://images.unsplash.com/photo-1503457574464-49f0b8b5d76e?w=300&h=200&fit=crop" alt="Baby learning" class="img-fluid rounded-3 photo-item w-100">
+        </div>
+        <div class="col">
+          <img src="https://images.unsplash.com/photo-1601758124164-3b5c27345a1f?w=300&h=200&fit=crop" alt="Building toys" class="img-fluid rounded-3 photo-item w-100">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section py-5">
+    <div class="container-fluid px-5">
+      <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
+        <div class="col">
+          <div class="feature-item p-4">
+            <div class="feature-icon-lg mb-3">🚚</div>
+            <h4 class="fw-bold">Free Shipping</h4>
+            <p class="text-muted mb-0">On orders over $50</p>
+          </div>
+        </div>
+        <div class="col">
+          <div class="feature-item p-4">
+            <div class="feature-icon-lg mb-3">💳</div>
+            <h4 class="fw-bold">Secure Payment</h4>
+            <p class="text-muted mb-0">100% secure transactions</p>
+          </div>
+        </div>
+        <div class="col">
+          <div class="feature-item p-4">
+            <div class="feature-icon-lg mb-3">♻️</div>
+            <h4 class="fw-bold">Easy Returns</h4>
+            <p class="text-muted mb-0">30-day return policy</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter-section py-5">
+    <div class="container-fluid px-5">
+      <div class="newsletter-box text-center p-5 rounded-4">
+        <h2 class="text-white mb-3 fw-bold">Newsletter</h2>
+        <p class="text-white mb-4">Get the latest offers and news directly in your inbox</p>
+        <form class="newsletter-form mx-auto" style="max-width: 600px;" (submit)="subscribeNewsletter($event)">
+          <div class="input-group input-group-lg">
+            <input type="email" class="form-control rounded-start-pill" placeholder="Enter your email" required>
+            <button class="btn btn-warning rounded-end-pill px-5 fw-bold" type="submit">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>

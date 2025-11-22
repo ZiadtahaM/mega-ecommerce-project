@@ -1,3 +1,13 @@
+/**
+ * @file app.spec.ts
+ * @description Component for RainBow Toys Angular E-commerce Platform
+ * @path src/app
+ * @author Your Name
+ * @date 2025-11-20
+ * @project RainBow Toys
+ */
+
+
 import { TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { App } from './app';

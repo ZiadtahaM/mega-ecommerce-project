@@ -1,1 +1,224 @@
-<p>contactus works!</p>
+<div class="contact-container">
+  <!-- Hero Section -->
+  <section class="contact-hero py-5">
+    <div class="container-fluid px-5">
+      <div class="row align-items-center py-5">
+        <div class="col-lg-6 col-md-6">
+          <h1 class="hero-title">Get in Touch!</h1>
+          <p class="hero-subtitle">We're here to help you find the perfect toys for your little ones</p>
+        </div>
+        <div class="col-lg-6 col-md-6 text-center">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop" alt="Customer support" class="img-fluid rounded-4">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="contact-form-section py-5">
+    <div class="container-fluid px-5">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="row g-4">
+            <!-- Contact Form -->
+            <div class="col-lg-8">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body p-5">
+                  <h2 class="card-title mb-4 text-center">Send us a Message</h2>
+                  
+                  <form (submit)="submitContactForm($event)">
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <label for="firstName" class="form-label">First Name *</label>
+                        <input type="text" class="form-control rounded-pill" id="firstName" placeholder="Enter your first name" required>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="lastName" class="form-label">Last Name *</label>
+                        <input type="text" class="form-control rounded-pill" id="lastName" placeholder="Enter your last name" required>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="email" class="form-label">Email Address *</label>
+                        <input type="email" class="form-control rounded-pill" id="email" placeholder="your.email@example.com" required>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control rounded-pill" id="phone" placeholder="+1 (555) 123-4567">
+                      </div>
+                      <div class="col-12">
+                        <label for="subject" class="form-label">Subject *</label>
+                        <select class="form-select rounded-pill" id="subject" required>
+                          <option value="">Choose a topic...</option>
+                          <option value="product-inquiry">Product Inquiry</option>
+                          <option value="order-support">Order Support</option>
+                          <option value="return-exchange">Return & Exchange</option>
+                          <option value="technical-support">Technical Support</option>
+                          <option value="partnership">Partnership Opportunity</option>
+                          <option value="general">General Question</option>
+                        </select>
+                      </div>
+                      <div class="col-12">
+                        <label for="message" class="form-label">Message *</label>
+                        <textarea class="form-control" id="message" rows="6" placeholder="Tell us how we can help you..." required></textarea>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="newsletter">
+                          <label class="form-check-label" for="newsletter">
+                            Subscribe to our newsletter for the latest toys and offers
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-warning btn-lg rounded-pill px-5 fw-bold">Send Message</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="col-lg-4">
+              <div class="contact-info">
+                <div class="card border-0 shadow-sm mb-4">
+                  <div class="card-body p-4 text-center">
+                    <div class="contact-icon mb-3">📞</div>
+                    <h5 class="fw-bold">Call Us</h5>
+                    <p class="text-muted mb-0">Mon-Fri 9AM-6PM EST</p>
+                    <p class="text-cyan fw-bold">+1 (555) 123-TOYS</p>
+                  </div>
+                </div>
+
+                <div class="card border-0 shadow-sm mb-4">
+                  <div class="card-body p-4 text-center">
+                    <div class="contact-icon mb-3">📧</div>
+                    <h5 class="fw-bold">Email Us</h5>
+                    <p class="text-muted mb-0">We'll respond within 24 hours</p>
+                    <p class="text-cyan fw-bold">hello@shiptyofs.com</p>
+                  </div>
+                </div>
+
+                <div class="card border-0 shadow-sm">
+                  <div class="card-body p-4 text-center">
+                    <div class="contact-icon mb-3">📍</div>
+                    <h5 class="fw-bold">Visit Us</h5>
+                    <p class="text-muted mb-0">123 Toy Street</p>
+                    <p class="text-muted mb-0">New York, NY 10001</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section py-5">
+    <div class="container-fluid px-5">
+      <h2 class="text-center section-title mb-5">Frequently Asked Questions</h2>
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+          <div class="faq-item p-4 rounded-4 shadow-sm">
+            <h5 class="fw-bold mb-3">What is your return policy?</h5>
+            <p class="text-muted mb-0">We offer a 30-day return policy for all unused items in original packaging. Free returns for orders over $50!</p>
+          </div>
+        </div>
+        <div class="col">
+          <div class="faq-item p-4 rounded-4 shadow-sm">
+            <h5 class="fw-bold mb-3">How long does shipping take?</h5>
+            <p class="text-muted mb-0">Standard shipping takes 3-5 business days. Express shipping (1-2 days) is available for $9.99.</p>
+          </div>
+        </div>
+        <div class="col">
+          <div class="faq-item p-4 rounded-4 shadow-sm">
+            <h5 class="fw-bold mb-3">Are your toys safe for children?</h5>
+            <p class="text-muted mb-0">All our toys meet or exceed safety standards and are tested for age-appropriate use. Check age labels on each product.</p>
+          </div>
+        </div>
+        <div class="col">
+          <div class="faq-item p-4 rounded-4 shadow-sm">
+            <h5 class="fw-bold mb-3">Do you offer gift wrapping?</h5>
+            <p class="text-muted mb-0">Yes! We offer beautiful gift wrapping for $2.99 per item. Add this during checkout or contact us for special requests.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Media Section -->
+  <section class="social-section py-5">
+    <div class="container-fluid px-5">
+      <div class="row align-items-center bg-promo rounded-4 p-5">
+        <div class="col-lg-8 col-md-6">
+          <h2 class="text-white display-6 fw-bold mb-3">Follow Us on Social Media</h2>
+          <p class="text-white mb-4">Stay updated with new toy arrivals, deals, and parenting tips</p>
+          <div class="d-flex gap-3">
+            <a href="#" class="btn btn-light btn-lg rounded-pill">
+              <i class="fab fa-facebook-f me-2"></i>Facebook
+            </a>
+            <a href="#" class="btn btn-light btn-lg rounded-pill">
+              <i class="fab fa-instagram me-2"></i>Instagram
+            </a>
+            <a href="#" class="btn btn-light btn-lg rounded-pill">
+              <i class="fab fa-twitter me-2"></i>Twitter
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 text-center mt-4 mt-md-0">
+          <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=300&fit=crop" alt="Social media" class="img-fluid rounded-3">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Store Hours -->
+  <section class="hours-section py-5">
+    <div class="container-fluid px-5">
+      <div class="row">
+        <div class="col-lg-6 mx-auto text-center">
+          <h2 class="section-title mb-4">Store Hours</h2>
+          <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+              <div class="row g-3">
+                <div class="col-6">
+                  <p class="fw-bold text-muted">Monday - Friday</p>
+                  <p class="text-cyan fw-bold">9:00 AM - 6:00 PM</p>
+                </div>
+                <div class="col-6">
+                  <p class="fw-bold text-muted">Saturday</p>
+                  <p class="text-cyan fw-bold">10:00 AM - 5:00 PM</p>
+                </div>
+                <div class="col-6">
+                  <p class="fw-bold text-muted">Sunday</p>
+                  <p class="text-muted">Closed</p>
+                </div>
+                <div class="col-6">
+                  <p class="fw-bold text-muted">Holidays</p>
+                  <p class="text-muted">Limited Hours</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section py-5">
+    <div class="container-fluid px-5">
+      <div class="newsletter-box text-center p-5 rounded-4">
+        <h2 class="text-white mb-3 fw-bold">Stay Connected</h2>
+        <p class="text-white mb-4">Get updates on new arrivals, special offers, and toy safety tips</p>
+        <form class="newsletter-form mx-auto" style="max-width: 600px;" (submit)="subscribeNewsletter($event)">
+          <div class="input-group input-group-lg">
+            <input type="email" class="form-control rounded-start-pill" placeholder="Enter your email" required>
+            <button class="btn btn-warning rounded-end-pill px-5 fw-bold" type="submit">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>

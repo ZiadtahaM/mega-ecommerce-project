@@ -1,0 +1,274 @@
+/* Contact Page Styles - Same as Home */
+
+/* Color Variables */
+:root {
+  --cyan: #00bcd4;
+  --yellow: #ffeb3b;
+  --success: #28a745;
+  --danger: #dc3545;
+  --promo: linear-gradient(135deg, #00bcd4 0%, #0097a7 100%);
+}
+
+.contact-container {
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.contact-hero {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #666;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Contact Form */
+.contact-form-section {
+  background-color: #f8f9fa;
+}
+
+.card {
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 188, 212, 0.15) !important;
+}
+
+.form-control, .form-select {
+  border: 2px solid #e9ecef;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 0.2rem rgba(0, 188, 212, 0.25);
+}
+
+.form-label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+/* Contact Info Cards */
+.contact-info .card {
+  background: white;
+  border-left: 4px solid var(--cyan);
+}
+
+.contact-icon {
+  font-size: 2.5rem;
+  color: var(--cyan);
+}
+
+.text-cyan {
+  color: var(--cyan) !important;
+}
+
+/* FAQ Section */
+.faq-section {
+  background-color: white;
+}
+
+.faq-item {
+  background: white;
+  border-left: 4px solid var(--yellow);
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-left-color: var(--cyan);
+}
+
+/* Social Section */
+.bg-promo {
+  background: var(--promo);
+}
+
+/* Newsletter */
+.newsletter-box {
+  background: var(--promo);
+}
+
+.newsletter-form .form-control {
+  border: none;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+}
+
+.newsletter-form .btn-warning {
+  background-color: var(--yellow);
+  border: none;
+  color: #333;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.newsletter-form .btn-warning:hover {
+  background-color: #fdd835;
+  transform: scale(1.05);
+}
+
+/* Button Styles */
+.btn-cyan {
+  background-color: var(--cyan);
+  border: none;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-cyan:hover {
+  background-color: #0097a7;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-outline-cyan {
+  border: 2px solid var(--cyan);
+  color: var(--cyan);
+  background: transparent;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-cyan:hover {
+  background-color: var(--cyan);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-warning {
+  background-color: var(--yellow);
+  border: none;
+  color: #333;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-warning:hover {
+  background-color: #fdd835;
+  color: #333;
+  transform: translateY(-2px);
+}
+
+.btn-success {
+  background-color: var(--success);
+  border: none;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .card-body {
+    padding: 2rem !important;
+  }
+  
+  .contact-info .card {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .newsletter-form .input-group-lg {
+    flex-direction: column;
+  }
+  
+  .newsletter-form .form-control,
+  .newsletter-form .btn {
+    border-radius: 50px !important;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Form Validation States */
+.form-control.is-valid {
+  border-color: var(--success);
+}
+
+.form-control.is-invalid {
+  border-color: var(--danger);
+}
+
+/* Loading States */
+.btn:disabled {
+  opacity: 0.6;
+  transform: none !important;
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cyan);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0097a7;
+}
