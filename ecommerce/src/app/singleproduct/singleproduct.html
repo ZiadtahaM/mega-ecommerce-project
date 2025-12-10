@@ -4,13 +4,11 @@
 
 @if (!loading && product) {
   <div class="product-page">
-    <!-- Breadcrumb -->
     <nav class="breadcrumb">
       <a routerLink="/">Home</a> / {{product.category}} / {{product.title}}
     </nav>
 
     <div class="product-layout">
-      <!-- Left: Images -->
       <div class="product-images-col">
         <div class="main-image-wrapper">
           <img [src]="selectedImage" [alt]="product.title" class="main-product-image">
@@ -26,7 +24,6 @@
         </div>
       </div>
 
-      <!-- Right: Product Info Box -->
       <div class="product-info-box">
         <h1 class="product-title">{{product.title}}</h1>
         
@@ -34,7 +31,6 @@
           <span class="product-price">${{product.price}}</span>
         </div>
 
-        <!-- Star Rating -->
         <div class="rating-wrapper">
           @for (star of getStarArray(); track star) {
             <span class="star" [class.filled]="star <= product.rating">★</span>
@@ -44,16 +40,22 @@
 
         <p class="product-description">{{product.description}}</p>
 
-        <!-- Share Section -->
         <div class="share-section">
           <span class="share-label">Share this:</span>
-          <button class="share-icon" title="Email">📧</button>
-          <button class="share-icon" title="Pinterest">📌</button>
-          <button class="share-icon" title="Facebook">👍</button>
-          <button class="share-icon" title="Copy Link">📋</button>
+          <button class="share-icon" title="Email">
+            <i class="icon-mail"></i>
+          </button>
+          <button class="share-icon" title="Pinterest">
+            <i class="icon-pinterest"></i>
+          </button>
+          <button class="share-icon" title="Facebook">
+            <i class="icon-facebook"></i>
+          </button>
+          <button class="share-icon" title="Copy Link">
+            <i class="icon-link"></i>
+          </button>
         </div>
 
-        <!-- Quantity + Add to Cart -->
         <div class="cart-section">
           <div class="quantity-selector">
             <button (click)="decreaseQty()">−</button>
@@ -61,11 +63,14 @@
             <button (click)="increaseQty()">+</button>
           </div>
           <button class="add-to-cart-btn" (click)="addToCart()">ADD TO CART</button>
-          <button class="icon-action-btn" title="Add to Wishlist">❤️</button>
-          <button class="icon-action-btn" title="Compare">⚖️</button>
+          <button class="icon-action-btn" title="Add to Wishlist">
+            <i class="icon-heart"></i>
+          </button>
+          <button class="icon-action-btn" title="Compare">
+            <i class="icon-compare"></i>
+          </button>
         </div>
 
-        <!-- Product Meta -->
         <div class="product-meta">
           <p><strong>SKU:</strong> {{product.sku}}</p>
           <p><strong>Category:</strong> {{product.category}}</p>
@@ -74,18 +79,16 @@
           }
         </div>
 
-        <!-- Payment Badges -->
         <div class="guaranteed-checkout">
           <p class="checkout-title">Guaranteed Safe Checkout</p>
           <div class="payment-badges">
-            <span class="badge-item">💳 VISA</span>
-            <span class="badge-item">💳 Mastercard</span>
-            <span class="badge-item">💳 PayPal</span>
-            <span class="badge-item">💳 Amex</span>
+            <span class="badge-item visa">VISA</span>
+            <span class="badge-item mastercard">Mastercard</span>
+            <span class="badge-item paypal">PayPal</span>
+            <span class="badge-item amex">Amex</span>
           </div>
         </div>
 
-        <!-- Tabs -->
         <div class="tabs-wrapper">
           <div class="tab-headers">
             <button class="tab-btn" 
@@ -142,7 +145,6 @@
       </div>
     </div>
 
-    <!-- Related Products -->
     @if (relatedProducts.length > 0) {
       <div class="related-products-section">
         <h2 class="section-heading">Related products</h2>
@@ -152,7 +154,9 @@
               @if (item.discountPercentage > 10) {
                 <span class="sale-badge">SALE</span>
               }
-              <button class="wishlist-icon">❤</button>
+              <button class="wishlist-icon">
+                <i class="icon-heart-outline"></i>
+              </button>
               <img [src]="item.thumbnail" [alt]="item.title" class="product-card-image">
               <div class="product-card-body">
                 <h5 class="product-card-title">{{item.title}}</h5>

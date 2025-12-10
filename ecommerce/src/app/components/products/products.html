@@ -1,122 +1,237 @@
 <div class="products-container">
-<!-- Hero Section -->
+  <!-- Hero Section -->
 <section class="products-hero py-5">
-<div class="container-fluid px-5">
-<div class="row align-items-center">
-<div class="col-lg-6">
-<h1 class="hero-title">Our Amazing Toys Collection</h1>
-<p class="hero-subtitle">Discover toys that spark imagination and support your child's development</p>
-</div>
-<div class="col-lg-6 text-center">
-<img src="imgs/photos_gallery_3_3.jpg" alt="Toys Collection" class="img-fluid rounded-3">
-</div>
-</div>
-</div>
+  <div class="container-fluid px-5">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <span class="hero-badge mb-3">
+          <i class="fas fa-sparkles me-2"></i>New Arrivals Daily
+        </span>
+        <h1 class="hero-title">Our Amazing Collection</h1>
+        <p class="hero-subtitle">Discover things that spark imagination and support your child's development through play, creativity, and endless fun!</p>
+        <div class="hero-stats d-flex gap-4 mt-4">
+          <div class="stat-item">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Products</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">50K+</div>
+            <div class="stat-label">Happy Kids</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">4.9</div>
+            <div class="stat-label">Rating</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 text-center">
+        <div class="hero-image-wrapper">
+          <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%2Fid%2FOIP.QbtI-XbcGn4aMv-imAeajAHaEF%3Fcb%3Ducfimg2%26pid%3DApi%26ucfimg%3D1&f=1&ipt=1f4bd2558636f0f948e61a7865351fc04e2f1835b85ee99fd0392d750b72e9bc&ipo=images" alt="Toys Collection" class="img-fluid rounded-3">
+          <div class="floating-badge badge-1">
+            <i class="fas fa-truck"></i> Free Shipping
+          </div>
+          <div class="floating-badge badge-2">
+            <i class="fas fa-shield-alt"></i> Safe & Certified
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- Filters Section -->
-<section class="filters-section py-4">
-<div class="container-fluid px-5">
-<div class="row align-items-center">
-<div class="col-lg-8">
-<div class="filter-tabs d-flex flex-wrap gap-2 mb-3">
-<button 
-*ngFor="let category of categories" 
-class="btn rounded-pill px-4"
-[class]="selectedCategory === category ? 'btn-warning' : 'btn-outline-cyan'"
-(click)="filterByCategory(category)"
->
-{{category}}
-</button>
-</div>
-</div>
-<div class="col-lg-4">
-<select class="form-select rounded-pill" >
-<option *ngFor="let range of priceRanges" [value]="range">
-{{range}}
-</option>
-</select>
-</div>
-</div>
-</div>
-</section>
-<!-- Products Grid -->
-<section class="products-section py-5">
-<div class="container-fluid px-5">
-<div class="row mb-4">
-<div class="col-12">
-<h2 class="section-title mb-0">Products ({{filteredProducts.length}})</h2>
-</div>
-</div>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-<div class="col" *ngFor="let item of filteredProducts">
-<div class="card product-card h-100 border-0 shadow-sm">
-<div class="position-relative product-img-wrapper">
-<img [src]="item.images[0]" class="card-img-top" [alt]="item.title" (click)="veiwproduct(item.id)" style="cursor: pointer;">
-<span *ngIf="item.discountPercentage > 0" class="badge bg-danger position-absolute discount-badge">-{{item.discountPercentage | number:'1.0-0'}}%</span>
-<span *ngIf="item.stock <= 5" class="badge bg-warning text-dark position-absolute low-stock-badge">Low Stock</span>
-</div>
-<div class="card-body d-flex flex-column">
-<p class="text-uppercase text-muted small mb-2">{{item.tags[0] || item.category}}</p>
-<h5 class="card-title product-title mb-3">{{item.title}}</h5>
-<!-- Rating -->
-<div class="d-flex align-items-center mb-3">
-<div class="stars me-2">
 
-</div>
-<span class="rating-text">{{item.rating}}</span>
-<span class="stock-info ms-auto text-muted small">({{item.stock}} left)</span>
-</div>
-<!-- Price -->
-<div class="mt-auto">
-<div class="d-flex justify-content-between align-items-center mb-3">
-<div>
-<div *ngIf="item.discountPercentage > 0" class="text-muted text-decoration-line-through small">${{item.price}}</div>
-<div class="text-danger fw-bold fs-5" *ngIf="item.discountPercentage > 0; else noDiscount">
-${{getPriceForDisplay(item) | number:'1.2-2'}}
-</div>
-<ng-template #noDiscount>
-<div class="text-danger fw-bold fs-5">${{item.price}}</div>
-</ng-template>
-</div>
-</div>
-<!-- Action Buttons -->
-<div class="d-flex gap-2">
-<button class="btn btn-success btn-sm rounded-pill flex-fill" (click)="addTocCart(item)" [disabled]="item.stock === 0">
-<i class="fas fa-shopping-cart me-1"></i>Add to Cart
-</button>
-<button class="btn btn-outline-cyan btn-sm rounded-pill" (click)="veiwproduct(item.id)">
-<i class="fas fa-eye"></i>
-</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- No products found -->
-<div *ngIf="filteredProducts.length === 0" class="text-center py-5">
-<div class="empty-state">
-<i class="fas fa-search fa-4x text-muted mb-3"></i>
-<h3 class="text-muted">No products found</h3>
-<p class="text-muted">Try adjusting your filters or browse all categories</p>
-<button class="btn btn-warning rounded-pill" (click)="filterByCategory('All')">View All Products</button>
-</div>
-</div>
-</div>
-</section>
-<!-- Category Banner -->
-<section class="category-banner py-5">
-<div class="container-fluid px-5">
-<div class="row align-items-center bg-promo rounded-4 p-5">
-<div class="col-lg-8">
-<h2 class="text-white display-6 fw-bold mb-3">Can't Find What You're Looking For?</h2>
-<p class="text-white mb-4">Browse our complete collection or contact us for personalized toy recommendations</p>
-<button class="btn btn-light btn-lg rounded-pill px-5 fw-bold">Contact Us</button>
-</div>
-<div class="col-lg-4 text-center mt-4 mt-lg-0">
-<img src="imgs/photos_gallery_1_9.jpg" alt="Happy Kids" class="img-fluid rounded-3">
-</div>
-</div>
-</div>
-</section>
+
+  <!-- Filters Section -->
+  <section class="filters-section py-4">
+    <div class="container-fluid px-5">
+      <div class="filters-wrapper">
+        <div class="row align-items-center">
+          <div class="col-lg-8">
+            <div class="filter-header mb-3">
+              <i class="fas fa-filter me-2"></i>
+              <span class="filter-label">Filter by Category</span>
+            </div>
+            <div class="filter-tabs d-flex flex-wrap gap-2 mb-3">
+              <button 
+                *ngFor="let category of categories" 
+                class="btn rounded-pill px-4"
+                [class]="selectedCategory === category ? 'btn-warning' : 'btn-outline-cyan'"
+                (click)="filterByCategory(category)"
+              >
+                {{category}}
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="filter-header mb-3">
+              <i class="fas fa-dollar-sign me-2"></i>
+              <span class="filter-label">Price Range</span>
+            </div>
+            <div class="select-wrapper">
+              <select class="form-select rounded-pill">
+                <option *ngFor="let range of priceRanges" [value]="range">
+                  {{range}}
+                </option>
+              </select>
+              <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+  <section class="products-section py-5">
+    <div class="container-fluid px-5">
+      <div class="row mb-4 align-items-center">
+        <div class="col-12 col-md-6">
+          <h2 class="section-title mb-0">
+            <i class="fas fa-th-large me-3"></i>Products 
+            <span class="product-count">({{filteredProducts.length}})</span>
+          </h2>
+        </div>
+        <div class="col-12 col-md-6 text-md-end mt-3 mt-md-0">
+          <span class="results-text">
+            <i class="fas fa-check-circle text-success me-2"></i>
+            Showing {{filteredProducts.length}} amazing products
+          </span>
+        </div>
+      </div>
+      
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <div class="col" *ngFor="let item of filteredProducts">
+          <div class="card product-card h-100 border-0 shadow-sm">
+            <div class="position-relative product-img-wrapper">
+              <img [src]="item.images[0]" class="card-img-top" [alt]="item.title" (click)="veiwproduct(item.id)" style="cursor: pointer;">
+              
+              <!-- Discount Badge -->
+              <span *ngIf="item.discountPercentage > 0" class="badge bg-danger position-absolute discount-badge">
+                <i class="fas fa-bolt me-1"></i>-{{item.discountPercentage | number:'1.0-0'}}%
+              </span>
+              
+              <!-- Low Stock Badge -->
+              <span *ngIf="item.stock <= 5" class="badge bg-warning text-dark position-absolute low-stock-badge">
+                <i class="fas fa-fire me-1"></i>Low Stock
+              </span>
+              
+              <!-- Quick View Overlay -->
+              <div class="quick-view-overlay">
+                <button class="btn btn-light btn-quick-view" (click)="veiwproduct(item.id)">
+                  <i class="fas fa-eye me-2"></i>Quick View
+                </button>
+              </div>
+              
+              <!-- Wishlist Button -->
+              <button class="wishlist-btn">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+            
+            <div class="card-body d-flex flex-column">
+              <p class="text-uppercase text-muted small mb-2 category-tag">
+                <i class="fas fa-tag me-1"></i>{{item.tags[0] || item.category}}
+              </p>
+              <h5 class="card-title product-title mb-3" (click)="veiwproduct(item.id)">{{item.title}}</h5>
+              
+              <!-- Rating -->
+              <div class="d-flex align-items-center mb-3">
+                <div class="stars me-2">
+                  <i class="fas fa-star" *ngFor="let star of [1,2,3,4,5]" 
+                     [class.filled]="star <= item.rating"
+                     [class.half-filled]="star > item.rating && star - 0.5 <= item.rating"></i>
+                </div>
+                <span class="rating-text">{{item.rating}}</span>
+                <span class="stock-info ms-auto">
+                  <i class="fas fa-box me-1"></i>{{item.stock}} left
+                </span>
+              </div>
+              
+              <!-- Price -->
+              <div class="mt-auto">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="price-wrapper">
+                    <div *ngIf="item.discountPercentage > 0" class="text-muted text-decoration-line-through small original-price">
+                      ${{item.price}}
+                    </div>
+                    <div class="text-danger fw-bold fs-5 current-price" *ngIf="item.discountPercentage > 0; else noDiscount">
+                      ${{getPriceForDisplay(item) | number:'1.2-2'}}
+                      <span class="save-badge ms-2">SAVE!</span>
+                    </div>
+                    <ng-template #noDiscount>
+                      <div class="text-danger fw-bold fs-5 current-price">${{item.price}}</div>
+                    </ng-template>
+                  </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="d-flex gap-2">
+                  <button class="btn btn-success btn-sm rounded-pill flex-fill add-to-cart-btn" 
+                          (click)="addTocCart(item)" 
+                          [disabled]="item.stock === 0">
+                    <i class="fas fa-shopping-cart me-1"></i>
+                    <span *ngIf="item.stock > 0">Add to Cart</span>
+                    <span *ngIf="item.stock === 0">Out of Stock</span>
+                  </button>
+                  <button class="btn btn-outline-cyan btn-sm rounded-pill view-btn" (click)="veiwproduct(item.id)">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- No products found -->
+      <div *ngIf="filteredProducts.length === 0" class="text-center py-5">
+        <div class="empty-state">
+          <div class="empty-icon-wrapper">
+            <i class="fas fa-search fa-4x"></i>
+          </div>
+          <h3>No products found</h3>
+          <p>Oops! We couldn't find what you're looking for.<br>Try adjusting your filters or browse all categories</p>
+          <button class="btn btn-warning rounded-pill px-5" (click)="filterByCategory('All')">
+            <i class="fas fa-th-large me-2"></i>View All Products
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Banner -->
+  <section class="category-banner py-5">
+    <div class="container-fluid px-5">
+      <div class="row align-items-center bg-promo rounded-4 p-5">
+        <div class="col-lg-8">
+          <span class="promo-badge mb-3">
+            <i class="fas fa-headset me-2"></i>We're Here to Help
+          </span>
+          <h2 class="text-white display-6 fw-bold mb-3">Can't Find What You're Looking For?</h2>
+          <p class="text-white mb-4 promo-text">
+            Browse our complete collection or contact us for personalized toy recommendations. 
+            Our experts are ready to help you find the perfect gift!
+          </p>
+          <div class="promo-features d-flex flex-wrap gap-3 mb-4">
+            <span class="feature-tag">
+              <i class="fas fa-check-circle me-2"></i>Expert Advice
+            </span>
+            <span class="feature-tag">
+              <i class="fas fa-check-circle me-2"></i>Age-Appropriate Picks
+            </span>
+            <span class="feature-tag">
+              <i class="fas fa-check-circle me-2"></i>Gift Wrapping
+            </span>
+          </div>
+          <button class="btn btn-light btn-lg rounded-pill px-5 fw-bold contact-btn">
+            <i class="fas fa-envelope me-2"></i>Contact Us
+          </button>
+        </div>
+        <div class="col-lg-4 text-center mt-4 mt-lg-0">
+          <div class="promo-image-wrapper">
+            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%2Fid%2FOIP.NNidL_gDZ1geRxZTtxzRywHaE8%3Fcb%3Ducfimg2%26pid%3DApi%26ucfimg%3D1&f=1&ipt=b4a3fd1699f27ac9975680c56e960a0127c66a1ddc1caa1eb36f90c5402da01b&ipo=images" alt="Happy Kids" class="img-fluid rounded-3">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
