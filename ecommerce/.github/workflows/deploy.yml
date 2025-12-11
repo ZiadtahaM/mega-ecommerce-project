@@ -1,24 +1,36 @@
-name: Deploy Angular App to GitHub Pages
+name: Deploy to GitHub Pages
+
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up Node.js
+
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
+
       - name: Install Dependencies
         run: npm ci
-      - name: Build Angular Project
-        run: npm run build
-      - name: Deploy to GitHub Pages
+
+      - name: Build
+      
+        run: npx ng build --base-href /mega-ecommerce-project/
+
+      - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: dist/mega-ecommerce-project
-          token: ${{ secrets.GITHUB_TOKEN }}
+       
+          folder: dist/ecommerce/browser

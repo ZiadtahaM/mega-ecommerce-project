@@ -1,8 +1,10 @@
-<div class="form-container">
-  <form #loginform="ngForm" (ngSubmit)="handleSubmit(loginform)" class="modern-form">
-    <h2 class="form-title">Create Account</h2>
-    
-   
+<div class="register-container">
+  <div class="register-box">
+    <div class="register-header">
+      <h1>ToyStore</h1>
+      <p>Create your account to get started.</p>
+    </div>
+
     <div class="form-debug" *ngIf="false">
       <h6>Value: {{loginform.value | json}}</h6>
       <h6>Valid: {{loginform.valid}}</h6>
@@ -12,194 +14,193 @@
       <h6>Submitted: {{loginform.submitted}}</h6>
     </div>
 
-    <!-- First Name -->
-    <div class="form-group">
-      <label for="username">First Name</label>
-      <input 
-        type="text" 
-        id="username"
-        #username="ngModel" 
-        required 
-        minlength="3" 
-        [(ngModel)]="model.first_name" 
-        name="username" 
-        placeholder="Enter your first name"
-        [class.input-error]="loginform.submitted && username.invalid"
-        [class.input-success]="username.valid && username.dirty">
+    <form #loginform="ngForm" (ngSubmit)="handleSubmit(loginform)">
       
-      @if(loginform.submitted && username.invalid){
-        <div class="error-message">
-          @if(username.errors?.['required']){
-            <p><span class="error-icon">⚠</span> First name is required</p>
-          }
-          @if(username.errors?.['minlength']){
-            <p><span class="error-icon">⚠</span> First name must be at least 3 characters</p>
-          }
-        </div>
-      }
-    </div>
-
-    <!-- Last Name -->
-    <div class="form-group">
-      <label for="lastname">Last Name</label>
-      <input 
-        type="text" 
-        id="lastname"
-        #secondname="ngModel" 
-        required 
-        minlength="3" 
-        [(ngModel)]="model.last_name" 
-        name="last_name" 
-        placeholder="Enter your last name"
-        [class.input-error]="loginform.submitted && secondname.invalid"
-        [class.input-success]="secondname.valid && secondname.dirty">
-      
-      @if(loginform.submitted && secondname.invalid){
-        <div class="error-message">
-          @if(secondname.errors?.['required']){
-            <p><span class="error-icon">⚠</span> Last name is required</p>
-          }
-          @if(secondname.errors?.['minlength']){
-            <p><span class="error-icon">⚠</span> Last name must be at least 3 characters</p>
-          }
-        </div>
-      }
-    </div>
-
-    <!-- Email -->
-    <div class="form-group">
-      <label for="email">Email Address</label>
-      <input 
-        type="email" 
-        id="email"
-        #email="ngModel" 
-        required 
-        minlength="3" 
-        [(ngModel)]="model.email" 
-        name="email" 
-        placeholder="Enter your email"
-        [class.input-error]="loginform.submitted && email.invalid"
-        [class.input-success]="email.valid && email.dirty">
-      
-      @if(loginform.submitted && email.invalid){
-        <div class="error-message">
-          @if(email.errors?.['required']){
-            <p><span class="error-icon">⚠</span> Email is required</p>
-          }
-          @if(email.errors?.['minlength']){
-            <p><span class="error-icon">⚠</span> Email must be at least 3 characters</p>
-          }
-        </div>
-      }
-    </div>
-
-    <!-- Phone -->
-    <div class="form-group">
-      <label for="phone">Phone Number</label>
-      <input 
-        type="text" 
-        id="phone"
-        #phone="ngModel" 
-        required 
-        minlength="3" 
-        [(ngModel)]="model.phone" 
-        name="phone" 
-        placeholder="Enter your phone number"
-        [class.input-error]="loginform.submitted && phone.invalid"
-        [class.input-success]="phone.valid && phone.dirty">
-      
-      @if(loginform.submitted && phone.invalid){
-        <div class="error-message">
-          @if(phone.errors?.['required']){
-            <p><span class="error-icon">⚠</span> Phone number is required</p>
-          }
-          @if(phone.errors?.['minlength']){
-            <p><span class="error-icon">⚠</span> Phone number must be at least 3 characters</p>
-          }
-        </div>
-      }
-    </div>
-
-
-    <div class="field-debug" *ngIf="false">
-      <h6>Value: {{username.value}}</h6>
-      <h6>Valid: {{username.valid}}</h6>
-      <h6>Invalid: {{username.invalid}}</h6>
-      <h6>Dirty: {{username.dirty}}</h6>
-      <h6>Touched: {{username.touched}}</h6>
-      <h6>Errors: {{username.errors | json}}</h6>
-    </div>
-
-    <!-- Password -->
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input 
-        type="password" 
-        id="password"
-        #password="ngModel" 
-        required 
-        minlength="8" 
-        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
-        [(ngModel)]="model.password" 
-        name="password"
-        placeholder="Create a strong password"
-        [class.input-error]="loginform.submitted && password.invalid"
-        [class.input-success]="password.valid && password.dirty">
-      
-      @if(loginform.submitted && password.invalid){
-        <div class="error-message">
-          @if(password.errors?.['required']){
-            <p><span class="error-icon">⚠</span> Password is required</p>
-          }
-          @if(password.errors?.['minlength']){
-            <p><span class="error-icon">⚠</span> Password must be at least 8 characters</p>
-          }
-          @if(password.errors?.['pattern']){
-            <p><span class="error-icon">⚠</span> Password must contain uppercase, lowercase, and number</p>
-          }
-        </div>
-      }
-      
-      <div class="password-hint">
-        <small>Must contain 8+ characters with uppercase, lowercase, and number</small>
+      <div class="form-group">
+        <label for="username">First Name</label>
+        <input 
+          type="text" 
+          id="username"
+          #username="ngModel" 
+          required 
+          minlength="3" 
+          [(ngModel)]="model.first_name" 
+          name="username" 
+          placeholder="Enter your first name"
+          [class.input-error]="loginform.submitted && username.invalid"
+          [class.input-success]="username.valid && username.dirty">
+        
+        @if(loginform.submitted && username.invalid){
+          <div class="field-error">
+            @if(username.errors?.['required']){
+              <span>First name is required</span>
+            }
+            @if(username.errors?.['minlength']){
+              <span>First name must be at least 3 characters</span>
+            }
+          </div>
+        }
       </div>
-    </div>
 
-    <!-- Confirm Password -->
-    <div class="form-group">
-      <label for="confirm_password">Confirm Password</label>
-      <input 
-        type="text" 
-        id="confirm_password"
-        #confirm_password="ngModel" 
-        required 
-        [(ngModel)]="model.confirm_password" 
-        name="confirm_password"
-        placeholder="Re-enter your password"
-        [class.input-error]="(confirm_password.invalid && (confirm_password.touched || confirm_password.dirty)) || (model.confirm_password && !passmatch())"
-        [class.input-success]="model.confirm_password && passmatch() && confirm_password.valid">
-      
-      @if(confirm_password.invalid && (confirm_password.touched || confirm_password.dirty) || (model.confirm_password && !passmatch())){
-        <div class="error-message">
-          @if(confirm_password.errors?.['required']){
-            <p><span class="error-icon">⚠</span> Please confirm your password</p>
-          }
-          @if(model.confirm_password && !passmatch()){
-            <p><span class="error-icon">⚠</span> Passwords do not match</p>
-          }
-        </div>
-      }
-      
-      @if(model.confirm_password && passmatch()){
-        <div class="success-message">
-          <p><span class="success-icon">✓</span> Passwords match</p>
-        </div>
-      }
-    </div>
+      <div class="form-group">
+        <label for="lastname">Last Name</label>
+        <input 
+          type="text" 
+          id="lastname"
+          #secondname="ngModel" 
+          required 
+          minlength="3" 
+          [(ngModel)]="model.last_name" 
+          name="last_name" 
+          placeholder="Enter your last name"
+          [class.input-error]="loginform.submitted && secondname.invalid"
+          [class.input-success]="secondname.valid && secondname.dirty">
+        
+        @if(loginform.submitted && secondname.invalid){
+          <div class="field-error">
+            @if(secondname.errors?.['required']){
+              <span>Last name is required</span>
+            }
+            @if(secondname.errors?.['minlength']){
+              <span>Last name must be at least 3 characters</span>
+            }
+          </div>
+        }
+      </div>
 
-    <button type="submit" class="submit-btn">
-      <span class="btn-text">Create Account</span>
-      <span class="btn-icon">→</span>
-    </button>
-  </form>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input 
+          type="email" 
+          id="email"
+          #email="ngModel" 
+          required 
+          minlength="3" 
+          [(ngModel)]="model.email" 
+          name="email" 
+          placeholder="Enter your email"
+          [class.input-error]="loginform.submitted && email.invalid"
+          [class.input-success]="email.valid && email.dirty">
+        
+        @if(loginform.submitted && email.invalid){
+          <div class="field-error">
+            @if(email.errors?.['required']){
+              <span>Email is required</span>
+            }
+            @if(email.errors?.['minlength']){
+              <span>Email must be at least 3 characters</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input 
+          type="text" 
+          id="phone"
+          #phone="ngModel" 
+          required 
+          minlength="3" 
+          [(ngModel)]="model.phone" 
+          name="phone" 
+          placeholder="Enter your phone number"
+          [class.input-error]="loginform.submitted && phone.invalid"
+          [class.input-success]="phone.valid && phone.dirty">
+        
+        @if(loginform.submitted && phone.invalid){
+          <div class="field-error">
+            @if(phone.errors?.['required']){
+              <span>Phone number is required</span>
+            }
+            @if(phone.errors?.['minlength']){
+              <span>Phone number must be at least 3 characters</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="field-debug" *ngIf="false">
+        <h6>Value: {{username.value}}</h6>
+        <h6>Valid: {{username.valid}}</h6>
+        <h6>Invalid: {{username.invalid}}</h6>
+        <h6>Dirty: {{username.dirty}}</h6>
+        <h6>Touched: {{username.touched}}</h6>
+        <h6>Errors: {{username.errors | json}}</h6>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password"
+          #password="ngModel" 
+          required 
+          minlength="8" 
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+          [(ngModel)]="model.password" 
+          name="password"
+          placeholder="Create a strong password"
+          [class.input-error]="loginform.submitted && password.invalid"
+          [class.input-success]="password.valid && password.dirty">
+        
+        @if(loginform.submitted && password.invalid){
+          <div class="field-error">
+            @if(password.errors?.['required']){
+              <span>Password is required</span>
+            }
+            @if(password.errors?.['minlength']){
+              <span>Password must be at least 8 characters</span>
+            }
+            @if(password.errors?.['pattern']){
+              <span>Password must contain uppercase, lowercase, and number</span>
+            }
+          </div>
+        }
+        
+        <div class="password-hint">
+          <small>Must contain 8+ characters with uppercase, lowercase, and number</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirm_password">Confirm Password</label>
+        <input 
+          type="password" 
+          id="confirm_password"
+          #confirm_password="ngModel" 
+          required 
+          [(ngModel)]="model.confirm_password" 
+          name="confirm_password"
+          placeholder="Re-enter your password"
+          [class.input-error]="(confirm_password.invalid && (confirm_password.touched || confirm_password.dirty)) || (model.confirm_password && !passmatch())"
+          [class.input-success]="model.confirm_password && passmatch() && confirm_password.valid">
+        
+        @if(confirm_password.invalid && (confirm_password.touched || confirm_password.dirty) || (model.confirm_password && !passmatch())){
+          <div class="field-error">
+            @if(confirm_password.errors?.['required']){
+              <span>Please confirm your password</span>
+            }
+            @if(model.confirm_password && !passmatch()){
+              <span>Passwords do not match</span>
+            }
+          </div>
+        }
+        
+        @if(model.confirm_password && passmatch()){
+          <div class="field-success">
+            <span>Passwords match</span>
+          </div>
+        }
+      </div>
+
+      <button type="submit" class="register-btn">
+        Create Account
+      </button>
+    </form>
+
+    <div class="login-link">
+      <p>Already have an account? <a routerLink="/login">Login here</a></p>
+    </div>
+  </div>
 </div>
