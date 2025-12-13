@@ -1,0 +1,733 @@
+RainBow Toys E-Commerce Platform
+Technical Documentation
+Table of Contents
+Overview
+
+Tech Stack
+
+Architecture
+
+Features
+
+Components
+
+Services
+
+Security
+
+Routing
+
+API
+
+State Management
+
+Setup
+
+Deployment
+
+Overview
+RainBow Toys is an Angular-based e-commerce platform for toy shopping. The application includes user authentication, product management, shopping cart functionality, and an admin panel for inventory control.
+
+What it does:
+
+User login and registration
+
+Product browsing with categories
+
+Shopping cart with persistence
+
+Admin dashboard for product CRUD operations
+
+Blog with pagination
+
+Role-based access control
+
+Technical approach:
+
+Angular 15+ with TypeScript
+
+Service-based state management
+
+JWT authentication
+
+RESTful API integration
+
+LocalStorage for persistence
+
+Tech Stack
+Frontend
+
+Angular 15+
+
+TypeScript
+
+Bootstrap 5
+
+RxJS
+
+Storage
+
+LocalStorage (cart, session)
+
+Networking
+
+Angular HttpClient
+
+HTTP Interceptors
+
+REST APIs
+
+Architecture
+Layer Structure
+text
+Components (UI)
+    ↓
+Services (Business Logic)
+    ↓
+HTTP Client (Data Access)
+    ↓
+APIs (External)
+Design Patterns
+Singleton Service
+
+typescript
+@Injectable({ providedIn: 'root' })
+export class serve {
+  // Single shared instance
+}
+Dependency Injection
+
+typescript
+constructor(public api: serve, private router: Router) {}
+Route Guards
+
+typescript
+{ path: 'dash', component: AdminDashboard, canActivate: [adminGuardGuard] }
+HTTP Interceptors
+
+typescript
+export const interceptorInterceptor: HttpInterceptorFn = (req, next) => {
+  // Add auth token to requests
+}
+Features
+Shopping Cart
+Add/remove products
+
+Quantity controls (+/-)
+
+Real-time price calculation
+
+Persists across sessions
+
+Visual badge counter
+
+Authentication
+Username/password login
+
+Registration form
+
+Admin vs User roles
+
+Session persistence
+
+Secure logout
+
+Admin Panel
+Product statistics (total/active/inactive)
+
+Create products
+
+Edit products
+
+Delete products (with confirmation)
+
+Real-time updates
+
+Product Catalog
+Browse all products
+
+Filter by category
+
+Product detail pages
+
+Image galleries
+
+Stock tracking
+
+Blog
+Category filtering
+
+Pagination (3 posts per page)
+
+Recent posts sidebar
+
+Tag system
+
+Components
+Navigation (nav-auth)
+Displays the main navigation bar with cart sidebar.
+
+typescript
+export class NavAuth {
+  username: string | null = null;
+  islogin: boolean = true;
+  showCart = false;
+  
+  constructor(public api: serve, private router: Router) {}
+  
+  ngOnInit() {
+    this.username = this.api.username;
+    this.islogin = this.api.isLogin;
+  }
+}
+Features:
+
+Cart badge shows item count
+
+User greeting when logged in
+
+Admin panel link (admin only)
+
+Cart sidebar with quantity controls
+
+Home
+Product showcase page with featured items.
+
+typescript
+ngOnInit() {
+  this.api.getProducts().subscribe((data: any) => {
+    this.products = data.products;
+  });
+}
+Cart
+Full cart management interface.
+
+Layout:
+
+Left: Item list with controls
+
+Right: Order summary
+
+Key methods:
+
+typescript
+increaseQuantity(item: any) {
+  item.quantity++;
+  this.updateCart();
+}
+
+decreaseQuantity(item: any) {
+  if (item.quantity > 1) {
+    item.quantity--;
+    this.updateCart();
+  }
+}
+
+updateCart() {
+  localStorage.setItem('cart', JSON.stringify(this.api.cart));
+}
+
+getItemTotal(item: any) {
+  return item.price * item.quantity;
+}
+Admin Dashboard
+Product management interface with CRUD operations.
+
+CREATE:
+
+typescript
+addProduct() {
+  this.api.addProduct(this.newProduct).subscribe({
+    next: (res) => {
+      this.products.unshift({...res, ...this.newProduct});
+      this.calculateStats();
+      alert('Product added successfully');
+    }
+  });
+}
+UPDATE:
+
+typescript
+updateProduct() {
+  this.api.updateProduct(this.editingProduct.id, this.editingProduct).subscribe({
+    next: (res) => {
+      const index = this.products.findIndex(p => p.id === this.editingProduct.id);
+      this.products[index] = {...this.products[index], ...this.editingProduct};
+      alert('Product updated');
+    }
+  });
+}
+DELETE:
+
+typescript
+deleteProduct(id: number) {
+  if (!confirm('Delete this product?')) return;
+  
+  this.api.deleteProduct(id).subscribe({
+    next: () => {
+      this.products = this.products.filter(p => p.id !== id);
+      this.calculateStats();
+    }
+  });
+}
+Blog
+Content listing with category filter and pagination.
+
+typescript
+export class Blog {
+  currentPage: number = 1;
+  itemsPerPage: number = 3;
+  
+  get filteredPosts(): BlogPost[] {
+    return this.selectedCategory === 'All Categories' 
+      ? this.allPosts 
+      : this.allPosts.filter(post => post.category === this.selectedCategory);
+  }
+  
+  get paginatedPosts(): BlogPost[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    return this.filteredPosts.slice(start, start + this.itemsPerPage);
+  }
+  
+  get totalPages(): number {
+    return Math.ceil(this.filteredPosts.length / this.itemsPerPage);
+  }
+}
+Pagination logic:
+
+text
+Page 1: slice(0, 3) → items 0,1,2
+Page 2: slice(3, 6) → items 3,4,5
+Page 3: slice(6, 9) → items 6,7,8
+Services
+Main Service (serve.ts)
+Central service for all application state and API calls.
+
+State properties:
+
+typescript
+@Injectable({ providedIn: 'root' })
+export class serve {
+  role: 'admin' | 'user' = 'user';
+  userid: any;
+  username: string | null = null;
+  email: string | null = null;
+  isLogin: boolean = false;
+  cart: any[] = [];
+  
+  constructor(public http: HttpClient) {
+    this.loadState();
+  }
+  
+  private loadState() {
+    // Load user from localStorage
+    const user = localStorage.getItem('user');
+    if (user) {
+      const userData = JSON.parse(user);
+      this.username = userData.firstName || userData.username;
+      this.email = userData.email;
+    }
+    
+    // Load cart from localStorage
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      this.cart = JSON.parse(savedCart);
+    }
+    
+    this.role = localStorage.getItem('role') as any || 'user';
+  }
+}
+Authentication Methods
+Login:
+
+typescript
+login(username: string, password: string): Observable<any> {
+  return this.http.post(`${API}/auth/login`, { username, password })
+    .pipe(
+      tap((res: any) => {
+        const token = res.accessToken || res.token;
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(res));
+        localStorage.setItem('userid', res.id);
+        
+        this.userid = res.id;
+        this.username = res.firstName || res.username;
+        this.email = res.email;
+        this.isLogin = true;
+        
+        this.role = username === 'emilys' ? 'admin' : 'user';
+        localStorage.setItem('role', this.role);
+      })
+    );
+}
+Register:
+
+typescript
+register(userData: any): Observable<any> {
+  return this.http.post(`${REGISTER_API}`, userData)
+    .pipe(
+      tap((res: any) => {
+        const token = res.data?.token || res.token;
+        const data = res.data || res;
+        
+        if (token) {
+          localStorage.setItem('token', token);
+          localStorage.setItem('user', JSON.stringify(data));
+          localStorage.setItem('userid', data.id);
+          
+          this.userid = data.id;
+          this.username = data.firstname || data.firstName;
+          this.email = data.email;
+          this.isLogin = true;
+        }
+      })
+    );
+}
+Logout:
+
+typescript
+logout(): void {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  localStorage.removeItem('userid');
+  localStorage.removeItem('role');
+  
+  this.userid = null;
+  this.username = null;
+  this.email = null;
+  this.isLogin = false;
+  this.cart = [];
+  this.role = 'user';
+}
+Auth checks:
+
+typescript
+isAuthenticated(): boolean {
+  return !!localStorage.getItem('token');
+}
+
+isAdmin(): boolean {
+  return this.role === 'admin';
+}
+Product Methods
+typescript
+getProducts(): Observable<any> {
+  return this.http.get(`${API}/products`);
+}
+
+getProduct(id: number): Observable<any> {
+  return this.http.get(`${API}/products/${id}`);
+}
+
+getProductsByCategory(category: string): Observable<any> {
+  return this.http.get(`${API}/products/category/${category}`);
+}
+
+addProduct(product: any): Observable<any> {
+  return this.http.post(`${API}/products/add`, product, {
+    headers: { 'Content-Type': 'application/json' }
+  });
+}
+
+updateProduct(id: number, updates: any): Observable<any> {
+  return this.http.put(`${API}/products/${id}`, updates);
+}
+
+deleteProduct(id: number): Observable<any> {
+  return this.http.delete(`${API}/products/${id}`);
+}
+Cart Methods
+typescript
+addToCart(product: any): void {
+  const existing = this.cart.find(item => item.id === product.id);
+  
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    this.cart.push({ ...product, quantity: 1 });
+  }
+  
+  localStorage.setItem('cart', JSON.stringify(this.cart));
+}
+
+removeFromCart(productId: number): void {
+  this.cart = this.cart.filter(item => item.id !== productId);
+  localStorage.setItem('cart', JSON.stringify(this.cart));
+}
+
+getCartTotal(): number {
+  return this.cart.reduce((total, item) => {
+    return total + (item.price * item.quantity);
+  }, 0);
+}
+Security
+HTTP Interceptor
+Automatically adds auth token to all requests.
+
+typescript
+export const interceptorInterceptor: HttpInterceptorFn = (req, next) => {
+  const token = localStorage.getItem('token');
+  
+  if (token) {
+    const cloned = req.clone({
+      headers: req.headers.set('Authorization', `Bearer ${token}`)
+    });
+    return next(cloned);
+  }
+  
+  return next(req);
+};
+Before:
+
+text
+GET /api/products
+Headers: {}
+After:
+
+text
+GET /api/products
+Headers: { Authorization: "Bearer eyJhbGci..." }
+Route Guards
+Login Guard - Blocks logged-in users from login/register pages
+
+typescript
+@Injectable({ providedIn: 'root' })
+export class LoginGuard implements CanActivate {
+  constructor(private authService: serve, private router: Router) {}
+  
+  canActivate(): boolean {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/dashboard']);
+      return false;
+    }
+    return true;
+  }
+}
+Admin Guard - Restricts admin routes
+
+typescript
+export const adminGuardGuard: CanActivateFn = (route, state) => {
+  const authService = inject(serve);
+  const router = inject(Router);
+  
+  if (authService.isAuthenticated() && authService.isAdmin()) {
+    return true;
+  }
+  
+  alert('Access denied. Admin only.');
+  return router.createUrlTree(['/home']);
+};
+Access Control
+Feature	Public	User	Admin
+Browse products	Yes	Yes	Yes
+Blog	Yes	Yes	Yes
+Cart	Yes	Yes	Yes
+Login/Register	Yes	No	No
+Admin panel	No	No	Yes
+Product CRUD	No	No	Yes
+Routing
+typescript
+export const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  
+  { path: 'login', component: Login, canActivate: [LoginGuard] },
+  { path: 'register', component: register, canActivate: [LoginGuard] },
+  
+  { path: 'home', component: Home },
+  { path: 'products', component: Products },
+  { path: 'product/:id', component: Singleproduct },
+  { path: 'blog', component: Blog },
+  { path: 'contact', component: Contactus },
+  { path: 'cart', component: Cart },
+  { path: 'checkout', component: Checkout },
+  { path: 'dashboard', component: Dashboard },
+  
+  { path: 'dash', component: AdminDashboard, canActivate: [adminGuardGuard] },
+  
+  { path: '**', component: Notfound }
+];
+Dynamic routes:
+
+typescript
+// Navigate
+this.router.navigate(['/product', 123]);
+
+// Get parameter
+this.route.params.subscribe(params => {
+  const id = params['id'];
+});
+API
+Endpoints
+Authentication:
+
+text
+POST /auth/login
+POST /customer/register
+Products:
+
+text
+GET    /products
+GET    /products/:id
+GET    /products/category/:category
+POST   /products/add
+PUT    /products/:id
+DELETE /products/:id
+User:
+
+text
+PUT /profile/:id
+Response Examples
+Products list:
+
+json
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Toy Car",
+      "description": "...",
+      "price": 549,
+      "stock": 94,
+      "brand": "Rainbow",
+      "category": "toys",
+      "thumbnail": "...",
+      "images": ["..."]
+    }
+  ],
+  "total": 100
+}
+Authentication:
+
+json
+{
+  "id": 1,
+  "username": "john",
+  "email": "john@example.com",
+  "firstName": "John",
+  "accessToken": "eyJhbGci..."
+}
+Error Handling
+typescript
+this.api.getProducts().subscribe({
+  next: (res) => {
+    this.products = res.products;
+  },
+  error: (err) => {
+    console.error('Error:', err);
+    alert('Failed to load products');
+  }
+});
+State Management
+Service State
+All state lives in the singleton service.
+
+typescript
+@Injectable({ providedIn: 'root' })
+export class serve {
+  // State
+  username: string | null = null;
+  isLogin: boolean = false;
+  cart: any[] = [];
+  role: 'admin' | 'user' = 'user';
+}
+How Components Access State
+typescript
+constructor(public api: serve) {}
+xml
+<span>{{ api.username }}</span>
+<span>{{ api.cart.length }}</span>
+<span>{{ api.getCartTotal() }}</span>
+Persistence
+typescript
+// Save
+localStorage.setItem('token', token);
+localStorage.setItem('cart', JSON.stringify(cart));
+
+// Load
+const token = localStorage.getItem('token');
+const cart = JSON.parse(localStorage.getItem('cart'));
+Keys used:
+
+token - Auth token
+
+user - User data
+
+role - User role
+
+cart - Shopping cart
+
+userid - User ID
+
+Setup
+Requirements
+text
+Node.js 16+
+npm 8+
+Angular CLI 15+
+Install
+bash
+git clone [repository]
+cd ecommerce
+npm install
+ng serve
+App runs at: http://localhost:4200
+
+Test Accounts
+Admin:
+
+text
+Username: emilys
+Password: kkmk
+User:
+
+text
+Username: tyrion
+Password: lannister
+Commands
+bash
+ng serve                    # Dev server
+ng build --prod            # Production build
+ng test                    # Run tests
+ng generate component NAME # New component
+Deployment
+Build
+bash
+ng build --configuration production
+Output goes to /dist or /public folder.
+
+Deploy
+Netlify/Vercel:
+
+Build the project
+
+Upload dist folder
+
+Add _redirects file:
+
+text
+/* /index.html 200
+Files:
+
+text
+public/
+├── index.html
+├── main.[hash].js
+├── styles.[hash].css
+└── assets/
+Project Stats
+text
+Components:  14
+Services:    1
+Guards:      2
+Routes:      13
+API calls:   8
+Notes
+updateCart() saves cart to localStorage so it persists on page refresh.
+
+api in constructors refers to the serve service (singleton pattern).
+
+Badge shows cart.length which is the number of different products, not total quantity.
+
+Admin role is assigned only to username "emilys".
+
+HTTP interceptor automatically adds the auth token to every API request.

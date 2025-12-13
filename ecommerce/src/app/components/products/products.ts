@@ -37,7 +37,7 @@ export class Products implements OnInit {
         this.productss = res.products || res;
         this.filteredProducts = [...this.productss];
         
-        // Extract unique categories from API data
+       
         const uniqueCategories = [...new Set(this.productss.map((p: any) => p.category))];
         this.categories = ['All', ...uniqueCategories];
       },
