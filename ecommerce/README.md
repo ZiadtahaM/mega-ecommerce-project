@@ -30,8 +30,6 @@ The application leverages the latest Angular features for maximum performance an
 2. Install dependencies: `npm install`.
 3. Launch development server: `npm run start`.
 
-Live Demo: https://ziadtaham.github.io/mega-ecommerce-project/
-
 ---
 
 Production-ready digital infrastructure for modern e-commerce ecosystems.
