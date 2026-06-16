@@ -1,59 +1,37 @@
-# Ecommerce
+# RainBow Toys
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.1.
+A high-fidelity e-commerce platform built with Angular, designed to provide a premium digital storefront experience. RainBow Toys implements a robust modular architecture to manage complex retail workflows, from dynamic product catalogs to secure administrative management.
 
-## Development server
+## Business Value
 
-To start a local development server, run:
+RainBow Toys serves as a scalable foundation for modern retail businesses:
+* Brand Authority: A professional, cohesive interface that builds trust and enhances brand perception.
+* Operational Control: Integrated administrative tools for managing inventory and system settings.
+* Global Reach: Fully responsive design ensuring a consistent and high-quality shopping experience across all user devices.
 
-```bash
-ng serve
-```
+## Technical Specifications
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The application leverages the latest Angular features for maximum performance and maintainability:
+* Component-Based Architecture: Highly modular UI built with reusable components (Home, Products, Blog, Contact).
+* State and Data Orchestration: Advanced service-based state management for cart persistence and asynchronous API integration.
+* Administrative Suite: Dedicated secure dashboard with route protection and granular access control.
+* Performance Centric: Optimized for rapid loading and fluid navigation through efficient routing and asset handling.
 
-## Code scaffolding
+## Stack
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+* Framework: Angular (v20+)
+* Language: TypeScript
+* Styling: Modular CSS / Bootstrap
+* Environment: Angular CLI
 
-```bash
-ng generate component component-name
-```
+## Setup
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+1. Clone the repository.
+2. Install dependencies: `npm install`.
+3. Launch development server: `npm run start`.
 
-```bash
-ng generate --help
-```
+Live Demo: https://ziadtaham.github.io/mega-ecommerce-project/
 
-## Building
+---
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Production-ready digital infrastructure for modern e-commerce ecosystems.
