@@ -5,6 +5,12 @@
       <p>Create your account to get started.</p>
     </div>
 
+    @if (errorMessage) {
+      <div class="alert alert-danger my-3" role="alert">
+        {{ errorMessage }}
+      </div>
+    }
+
     <div class="form-debug" *ngIf="false">
       <h6>Value: {{loginform.value | json}}</h6>
       <h6>Valid: {{loginform.valid}}</h6>
@@ -194,8 +200,8 @@
         }
       </div>
 
-      <button type="submit" class="register-btn">
-        Create Account
+      <button type="submit" class="register-btn" [disabled]="isLoading">
+        {{ isLoading ? 'Creating Account...' : 'Create Account' }}
       </button>
     </form>
 

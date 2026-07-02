@@ -32,6 +32,8 @@ import { Singleproduct } from './singleproduct/singleproduct';
 import { Login } from './login/login';
 import { AdminDashboard } from './admin-dashboard/admin-dashboard';
 
+import { provideToastr } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     App,
@@ -54,10 +56,19 @@ import { AdminDashboard } from './admin-dashboard/admin-dashboard';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,FormsModule 
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [
-    provideBrowserGlobalErrorListeners(),FormsModule,provideHttpClient(withInterceptors([interceptorInterceptor])),HttpClientModule,BrowserAnimationsModule, 
+    provideBrowserGlobalErrorListeners(),
+    provideHttpClient(withInterceptors([interceptorInterceptor])),
+    provideToastr({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true
+    })
   ],
   bootstrap: [App]
 })

@@ -13,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 import { serve } from '../../services/serve';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-home',
   standalone: false,
@@ -21,7 +22,7 @@ import { Router } from '@angular/router';
 })
 export class Home implements OnInit{
   productss:any[]=[]
-constructor(public api:serve ,public router:Router){}
+constructor(public api:serve ,public router:Router, private toastr: ToastrService){}
 ngOnInit(): void {
   this.api.getProducts().subscribe(res => {
     console.log(res);
@@ -31,20 +32,15 @@ ngOnInit(): void {
 }
  subscribeNewsletter(event: Event) {
     event.preventDefault();
-    alert('Subscribed successfully!');
+    this.toastr.success('Subscribed successfully!');
   }
  addTocCart(item: any) {
     console.log('Adding to cart:', item);
     this.api.addToCart(item);
-    alert('Added to cart successfully!');
+    this.toastr.success(`${item.title} added to cart!`);
   }
-  veiwproduct(id:any){
-    this.api.getProduct(id).subscribe(res => {
-    console.log(res);
+  veiwproduct(id: any) {
     this.router.navigate([`/product/${id}`]);
-
-  })
-  
   }
   
 }

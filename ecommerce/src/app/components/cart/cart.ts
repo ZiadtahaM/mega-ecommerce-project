@@ -83,7 +83,7 @@ async placeOrder() {
       alert('Your cart is empty!');
       return;
     }
-    alert('Proceeding to checkout...');
+    this.router.navigate(['/checkout']);
   }
 }
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { serve } from '../services/serve';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-singleproduct',
@@ -19,7 +20,8 @@ export class Singleproduct {
   constructor(
     public api: serve, 
     private router: Router, 
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -68,11 +70,10 @@ export class Singleproduct {
   }
 
   addToCart() {
-  
     for (let i = 0; i < this.quantity; i++) {
       this.api.addToCart(this.product);
     }
-    alert(`Added ${this.quantity} ${this.product.title} to cart!`);
+    this.toastr.success(`Added ${this.quantity} ${this.product.title} to cart!`);
     this.quantity = 1; 
   }
 

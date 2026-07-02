@@ -1,12 +1,9 @@
-name: Deploy to GitHub Pages
+name: Deploy to Cloudflare Pages
 
 on:
   push:
     branches:
-      - master
-
-permissions:
-  contents: write
+      - main
 
 jobs:
   build-and-deploy:
@@ -27,12 +24,14 @@ jobs:
         working-directory: ecommerce
 
       - name: Build
-        run: npx ng build --base-href /mega-ecommerce-project/
-        working-directory: ecommerce r
+        run: npm run build
+        working-directory: ecommerce
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
         with:
-          branch: gh-pages
-        
-          folder: ecommerce/dist/ecommerce/browser
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: 'rainbow-toys'
+          directory: 'ecommerce/dist/ecommerce/browser'
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

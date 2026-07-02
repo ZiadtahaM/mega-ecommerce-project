@@ -12,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 import { serve } from '../../services/serve';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products',
@@ -27,7 +28,7 @@ export class Products implements OnInit {
   selectedPriceRange: string = 'All';
   priceRanges: string[] = ['All', 'Under $25', '$25-$50', 'Over $50'];
 
-  constructor(public api: serve, public router: Router) {}
+  constructor(public api: serve, public router: Router, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     // Load products from your serve service API
@@ -89,14 +90,11 @@ export class Products implements OnInit {
   addTocCart(item: any) {
     console.log('Adding to cart:', item);
     this.api.addToCart(item);
-    alert('Added to cart successfully!');
+    this.toastr.success(`${item.title} added to cart!`);
   }
 
   veiwproduct(id: any) {
-    this.api.getProduct(id).subscribe(res => {
-      console.log(res);
-      this.router.navigate([`/product/${id}`]);
-    });
+    this.router.navigate([`/product/${id}`]);
   }
 
   getPriceForDisplay(item: any): number {
