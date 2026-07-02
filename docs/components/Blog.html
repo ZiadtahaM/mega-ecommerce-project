@@ -1,0 +1,1271 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ecommerce documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">ecommerce documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  Blog</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/blog/blog.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-blog</code></td>
+            </tr>
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./blog.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./blog.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#allPosts" >allPosts</a>
+                            </li>
+                            <li>
+                                <a href="#categories" >categories</a>
+                            </li>
+                            <li>
+                                <a href="#currentPage" >currentPage</a>
+                            </li>
+                            <li>
+                                <a href="#itemsPerPage" >itemsPerPage</a>
+                            </li>
+                            <li>
+                                <a href="#popularTags" >popularTags</a>
+                            </li>
+                            <li>
+                                <a href="#recentPosts" >recentPosts</a>
+                            </li>
+                            <li>
+                                <a href="#selectedCategory" >selectedCategory</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#goToPage" >goToPage</a>
+                            </li>
+                            <li>
+                                <a href="#nextPage" >nextPage</a>
+                            </li>
+                            <li>
+                                <a href="#previousPage" >previousPage</a>
+                            </li>
+                            <li>
+                                <a href="#selectCategory" >selectCategory</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#filteredPosts" >filteredPosts</a>
+                                </li>
+                                <li>
+                                    <a href="#paginatedPosts" >paginatedPosts</a>
+                                </li>
+                                <li>
+                                    <a href="#totalPages" >totalPages</a>
+                                </li>
+                                <li>
+                                    <a href="#pageNumbers" >pageNumbers</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goToPage"></a>
+                    <span class="name">
+                        <span ><b>goToPage</b></span>
+                        <a href="#goToPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goToPage(page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="145"
+                                    class="link-to-prism">src/app/components/blog/blog.ts:145</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nextPage"></a>
+                    <span class="name">
+                        <span ><b>nextPage</b></span>
+                        <a href="#nextPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>nextPage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">src/app/components/blog/blog.ts:157</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="previousPage"></a>
+                    <span class="name">
+                        <span ><b>previousPage</b></span>
+                        <a href="#previousPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>previousPage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/components/blog/blog.ts:151</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectCategory"></a>
+                    <span class="name">
+                        <span ><b>selectCategory</b></span>
+                        <a href="#selectCategory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>selectCategory(category: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/app/components/blog/blog.ts:163</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>category</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="allPosts"></a>
+                    <span class="name">
+                        <span ><b>allPosts</b></span>
+                        <a href="#allPosts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/BlogPost.html" target="_self" >BlogPost[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+      id: 1,
+      date: &#x27;20 May 2025&#x27;,
+      title: &#x27;Early Minds: What Should Affect Early Childhood Education&#x27;,
+      description: &#x27;We love to share our joy, happiness and daily important tips through our sharing post&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w&#x3D;600&#x27;,
+      category: &#x27;Education&#x27;
+    },
+    {
+      id: 2,
+      date: &#x27;18 May 2025&#x27;,
+      title: &#x27;Facilitating the Best Skills in Kids&#x27;,
+      description: &#x27;Developing essential skills through interactive play and learning activities&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1503919005314-30d93d07d823?w&#x3D;600&#x27;,
+      category: &#x27;Development&#x27;
+    },
+    {
+      id: 3,
+      date: &#x27;15 May 2025&#x27;,
+      title: &#x27;Emotional and Mental Development&#x27;,
+      description: &#x27;Understanding the emotional needs of children and supporting mental growth&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1587616211892-f5b4d2987c7c?w&#x3D;600&#x27;,
+      category: &#x27;Psychology&#x27;
+    },
+    {
+      id: 4,
+      date: &#x27;12 May 2025&#x27;,
+      title: &#x27;Learning Through Play Activities&#x27;,
+      description: &#x27;Creative activities that enhance learning and cognitive development&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1503919005314-30d93d07d823?w&#x3D;600&#x27;,
+      category: &#x27;Activities&#x27;
+    },
+    {
+      id: 5,
+      date: &#x27;10 May 2025&#x27;,
+      title: &#x27;Building Social Skills Early&#x27;,
+      description: &#x27;Helping children develop strong communication and social abilities&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w&#x3D;600&#x27;,
+      category: &#x27;Social&#x27;
+    },
+    {
+      id: 6,
+      date: &#x27;08 May 2025&#x27;,
+      title: &#x27;Creative Arts for Children&#x27;,
+      description: &#x27;Encouraging creativity through art, music, and expressive activities&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1587616211892-f5b4d2987c7c?w&#x3D;600&#x27;,
+      category: &#x27;Arts&#x27;
+    },
+    {
+      id: 7,
+      date: &#x27;05 May 2025&#x27;,
+      title: &#x27;Physical Development Milestones&#x27;,
+      description: &#x27;Understanding key physical development stages in early childhood&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1503919005314-30d93d07d823?w&#x3D;600&#x27;,
+      category: &#x27;Health&#x27;
+    },
+    {
+      id: 8,
+      date: &#x27;03 May 2025&#x27;,
+      title: &#x27;Nutrition for Growing Minds&#x27;,
+      description: &#x27;Essential nutrition tips for optimal child development&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w&#x3D;600&#x27;,
+      category: &#x27;Nutrition&#x27;
+    },
+    {
+      id: 9,
+      date: &#x27;01 May 2025&#x27;,
+      title: &#x27;Parent-Child Bonding Activities&#x27;,
+      description: &#x27;Strengthening the parent-child relationship through quality time&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1587616211892-f5b4d2987c7c?w&#x3D;600&#x27;,
+      category: &#x27;Parenting&#x27;
+    }
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/blog/blog.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="categories"></a>
+                    <span class="name">
+                        <span ><b>categories</b></span>
+                        <a href="#categories"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&#x27;All Categories&#x27;, &#x27;Education&#x27;, &#x27;Development&#x27;, &#x27;Activities&#x27;, &#x27;Arts&#x27;, &#x27;Health&#x27;]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/components/blog/blog.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentPage"></a>
+                    <span class="name">
+                        <span ><b>currentPage</b></span>
+                        <a href="#currentPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>1</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/components/blog/blog.ts:110</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="itemsPerPage"></a>
+                    <span class="name">
+                        <span ><b>itemsPerPage</b></span>
+                        <a href="#itemsPerPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>3</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/components/blog/blog.ts:111</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="popularTags"></a>
+                    <span class="name">
+                        <span ><b>popularTags</b></span>
+                        <a href="#popularTags"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&#x27;Education&#x27;, &#x27;Care&#x27;, &#x27;Learning&#x27;, &#x27;Health&#x27;, &#x27;Growth&#x27;, &#x27;Activities&#x27;]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/components/blog/blog.ts:116</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="recentPosts"></a>
+                    <span class="name">
+                        <span ><b>recentPosts</b></span>
+                        <a href="#recentPosts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    { title: &#x27;Discovering the new way of digital life&#x27;, image: &#x27;https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w&#x3D;100&#x27;, date: &#x27;4 January 2025&#x27; },
+    { title: &#x27;Care for your children&#x27;, image: &#x27;https://images.unsplash.com/photo-1503919005314-30d93d07d823?w&#x3D;100&#x27;, date: &#x27;4 January 2025&#x27; },
+    { title: &#x27;Learning and Development&#x27;, image: &#x27;https://images.unsplash.com/photo-1587616211892-f5b4d2987c7c?w&#x3D;100&#x27;, date: &#x27;4 January 2025&#x27; }
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/app/components/blog/blog.ts:118</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedCategory"></a>
+                    <span class="name">
+                        <span ><b>selectedCategory</b></span>
+                        <a href="#selectedCategory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;All Categories&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/components/blog/blog.ts:114</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="filteredPosts"></a>
+                        <span class="name"><b>filteredPosts</b><a href="#filteredPosts"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>filteredPosts()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/components/blog/blog.ts:124</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="paginatedPosts"></a>
+                        <span class="name"><b>paginatedPosts</b><a href="#paginatedPosts"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>paginatedPosts()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/components/blog/blog.ts:131</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="totalPages"></a>
+                        <span class="name"><b>totalPages</b><a href="#totalPages"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>totalPages()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/components/blog/blog.ts:137</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pageNumbers"></a>
+                        <span class="name"><b>pageNumbers</b><a href="#pageNumbers"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>pageNumbers()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/components/blog/blog.ts:141</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+
+import { CommonModule } from &#x27;@angular/common&#x27;;
+interface BlogPost {
+  id: number;
+  date: string;
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+}
+@Component({
+  selector: &#x27;app-blog&#x27;,
+  standalone: false,
+  templateUrl: &#x27;./blog.html&#x27;,
+  styleUrl: &#x27;./blog.css&#x27;,
+ 
+})
+export class Blog {
+
+
+
+
+  allPosts: BlogPost[] &#x3D; [
+    {
+      id: 1,
+      date: &#x27;20 May 2025&#x27;,
+      title: &#x27;Early Minds: What Should Affect Early Childhood Education&#x27;,
+      description: &#x27;We love to share our joy, happiness and daily important tips through our sharing post&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w&#x3D;600&#x27;,
+      category: &#x27;Education&#x27;
+    },
+    {
+      id: 2,
+      date: &#x27;18 May 2025&#x27;,
+      title: &#x27;Facilitating the Best Skills in Kids&#x27;,
+      description: &#x27;Developing essential skills through interactive play and learning activities&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1503919005314-30d93d07d823?w&#x3D;600&#x27;,
+      category: &#x27;Development&#x27;
+    },
+    {
+      id: 3,
+      date: &#x27;15 May 2025&#x27;,
+      title: &#x27;Emotional and Mental Development&#x27;,
+      description: &#x27;Understanding the emotional needs of children and supporting mental growth&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1587616211892-f5b4d2987c7c?w&#x3D;600&#x27;,
+      category: &#x27;Psychology&#x27;
+    },
+    {
+      id: 4,
+      date: &#x27;12 May 2025&#x27;,
+      title: &#x27;Learning Through Play Activities&#x27;,
+      description: &#x27;Creative activities that enhance learning and cognitive development&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1503919005314-30d93d07d823?w&#x3D;600&#x27;,
+      category: &#x27;Activities&#x27;
+    },
+    {
+      id: 5,
+      date: &#x27;10 May 2025&#x27;,
+      title: &#x27;Building Social Skills Early&#x27;,
+      description: &#x27;Helping children develop strong communication and social abilities&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w&#x3D;600&#x27;,
+      category: &#x27;Social&#x27;
+    },
+    {
+      id: 6,
+      date: &#x27;08 May 2025&#x27;,
+      title: &#x27;Creative Arts for Children&#x27;,
+      description: &#x27;Encouraging creativity through art, music, and expressive activities&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1587616211892-f5b4d2987c7c?w&#x3D;600&#x27;,
+      category: &#x27;Arts&#x27;
+    },
+    {
+      id: 7,
+      date: &#x27;05 May 2025&#x27;,
+      title: &#x27;Physical Development Milestones&#x27;,
+      description: &#x27;Understanding key physical development stages in early childhood&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1503919005314-30d93d07d823?w&#x3D;600&#x27;,
+      category: &#x27;Health&#x27;
+    },
+    {
+      id: 8,
+      date: &#x27;03 May 2025&#x27;,
+      title: &#x27;Nutrition for Growing Minds&#x27;,
+      description: &#x27;Essential nutrition tips for optimal child development&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w&#x3D;600&#x27;,
+      category: &#x27;Nutrition&#x27;
+    },
+    {
+      id: 9,
+      date: &#x27;01 May 2025&#x27;,
+      title: &#x27;Parent-Child Bonding Activities&#x27;,
+      description: &#x27;Strengthening the parent-child relationship through quality time&#x27;,
+      image: &#x27;https://images.unsplash.com/photo-1587616211892-f5b4d2987c7c?w&#x3D;600&#x27;,
+      category: &#x27;Parenting&#x27;
+    }
+  ];
+
+  // Pagination properties
+  currentPage: number &#x3D; 1;
+  itemsPerPage: number &#x3D; 3;
+  
+  categories &#x3D; [&#x27;All Categories&#x27;, &#x27;Education&#x27;, &#x27;Development&#x27;, &#x27;Activities&#x27;, &#x27;Arts&#x27;, &#x27;Health&#x27;];
+  selectedCategory &#x3D; &#x27;All Categories&#x27;;
+
+  popularTags &#x3D; [&#x27;Education&#x27;, &#x27;Care&#x27;, &#x27;Learning&#x27;, &#x27;Health&#x27;, &#x27;Growth&#x27;, &#x27;Activities&#x27;];
+
+  recentPosts &#x3D; [
+    { title: &#x27;Discovering the new way of digital life&#x27;, image: &#x27;https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w&#x3D;100&#x27;, date: &#x27;4 January 2025&#x27; },
+    { title: &#x27;Care for your children&#x27;, image: &#x27;https://images.unsplash.com/photo-1503919005314-30d93d07d823?w&#x3D;100&#x27;, date: &#x27;4 January 2025&#x27; },
+    { title: &#x27;Learning and Development&#x27;, image: &#x27;https://images.unsplash.com/photo-1587616211892-f5b4d2987c7c?w&#x3D;100&#x27;, date: &#x27;4 January 2025&#x27; }
+  ];
+
+  get filteredPosts(): BlogPost[] {
+    if (this.selectedCategory &#x3D;&#x3D;&#x3D; &#x27;All Categories&#x27;) {
+      return this.allPosts;
+    }
+    return this.allPosts.filter(post &#x3D;&gt; post.category &#x3D;&#x3D;&#x3D; this.selectedCategory);
+  }
+
+  get paginatedPosts(): BlogPost[] {
+    const start &#x3D; (this.currentPage - 1) * this.itemsPerPage;
+    const end &#x3D; start + this.itemsPerPage;
+    return this.filteredPosts.slice(start, end);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.filteredPosts.length / this.itemsPerPage);
+  }
+
+  get pageNumbers(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) &#x3D;&gt; i + 1);
+  }
+
+  goToPage(page: number): void {
+    if (page &gt;&#x3D; 1 &amp;&amp; page &lt;&#x3D; this.totalPages) {
+      this.currentPage &#x3D; page;
+    }
+  }
+
+  previousPage(): void {
+    if (this.currentPage &gt; 1) {
+      this.currentPage--;
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage &lt; this.totalPages) {
+      this.currentPage++;
+    }
+  }
+
+  selectCategory(category: string): void {
+    this.selectedCategory &#x3D; category;
+    this.currentPage &#x3D; 1; // Reset to first page when category changes
+  }
+}
+
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;blog-container&quot;&gt;
+  &lt;!-- Sidebar --&gt;
+  &lt;aside class&#x3D;&quot;sidebar&quot;&gt;
+    &lt;!-- Categories --&gt;
+    &lt;div class&#x3D;&quot;sidebar-section&quot;&gt;
+      &lt;h3&gt;Categories&lt;/h3&gt;
+      &lt;ul class&#x3D;&quot;category-list&quot;&gt;
+        &lt;li *ngFor&#x3D;&quot;let category of categories&quot; 
+            [class.active]&#x3D;&quot;category &#x3D;&#x3D;&#x3D; selectedCategory&quot;
+            (click)&#x3D;&quot;selectCategory(category)&quot;&gt;
+          {{ category }}
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Recent Posts --&gt;
+    &lt;div class&#x3D;&quot;sidebar-section&quot;&gt;
+      &lt;h3&gt;Recent Post&lt;/h3&gt;
+      &lt;div class&#x3D;&quot;recent-posts&quot;&gt;
+        &lt;div class&#x3D;&quot;recent-post-item&quot; *ngFor&#x3D;&quot;let post of recentPosts&quot;&gt;
+          &lt;img [src]&#x3D;&quot;post.image&quot; [alt]&#x3D;&quot;post.title&quot;&gt;
+          &lt;div class&#x3D;&quot;recent-post-content&quot;&gt;
+            &lt;h4&gt;{{ post.title }}&lt;/h4&gt;
+            &lt;p class&#x3D;&quot;date&quot;&gt;{{ post.date }}&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Popular Tags --&gt;
+    &lt;div class&#x3D;&quot;sidebar-section&quot;&gt;
+      &lt;h3&gt;Popular Tag&lt;/h3&gt;
+      &lt;div class&#x3D;&quot;tags&quot;&gt;
+        &lt;span class&#x3D;&quot;tag&quot; *ngFor&#x3D;&quot;let tag of popularTags&quot;&gt;{{ tag }}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Newsletter Box --&gt;
+    &lt;div class&#x3D;&quot;sidebar-section newsletter&quot;&gt;
+      &lt;div class&#x3D;&quot;newsletter-content&quot;&gt;
+        &lt;h3&gt;Latest Type of Articles in your Inbox&lt;/h3&gt;
+        &lt;button class&#x3D;&quot;subscribe-btn&quot;&gt;Join Now&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/aside&gt;
+
+  &lt;!-- Main Content --&gt;
+  &lt;main class&#x3D;&quot;main-content&quot;&gt;
+    &lt;h1 class&#x3D;&quot;page-title&quot;&gt;Blog Standard&lt;/h1&gt;
+    &lt;p class&#x3D;&quot;page-subtitle&quot;&gt;Home / Blogs&lt;/p&gt;
+
+    &lt;!-- Blog Posts --&gt;
+    &lt;div class&#x3D;&quot;blog-posts&quot;&gt;
+      &lt;article class&#x3D;&quot;blog-post&quot; *ngFor&#x3D;&quot;let post of paginatedPosts&quot;&gt;
+        &lt;img [src]&#x3D;&quot;post.image&quot; [alt]&#x3D;&quot;post.title&quot; class&#x3D;&quot;post-image&quot;&gt;
+        &lt;div class&#x3D;&quot;post-content&quot;&gt;
+          &lt;p class&#x3D;&quot;post-date&quot;&gt;{{ post.date }}&lt;/p&gt;
+          &lt;h2 class&#x3D;&quot;post-title&quot;&gt;{{ post.title }}&lt;/h2&gt;
+          &lt;p class&#x3D;&quot;post-description&quot;&gt;{{ post.description }}&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/article&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Pagination --&gt;
+    &lt;div class&#x3D;&quot;pagination&quot;&gt;
+      &lt;button class&#x3D;&quot;page-btn&quot; 
+              (click)&#x3D;&quot;previousPage()&quot; 
+              [disabled]&#x3D;&quot;currentPage &#x3D;&#x3D;&#x3D; 1&quot;&gt;
+        ←
+      &lt;/button&gt;
+      
+      &lt;button *ngFor&#x3D;&quot;let page of pageNumbers&quot; 
+              class&#x3D;&quot;page-btn&quot; 
+              [class.active]&#x3D;&quot;page &#x3D;&#x3D;&#x3D; currentPage&quot;
+              (click)&#x3D;&quot;goToPage(page)&quot;&gt;
+        {{ page }}
+      &lt;/button&gt;
+      
+      &lt;button class&#x3D;&quot;page-btn&quot; 
+              (click)&#x3D;&quot;nextPage()&quot; 
+              [disabled]&#x3D;&quot;currentPage &#x3D;&#x3D;&#x3D; totalPages&quot;&gt;
+        →
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="blog-container">  <!-- Sidebar -->  <aside class="sidebar">    <!-- Categories -->    <div class="sidebar-section">      <h3>Categories</h3>      <ul class="category-list">        <li *ngFor="let category of categories"             [class.active]="category === selectedCategory"            (click)="selectCategory(category)">          {{ category }}        </li>      </ul>    </div>    <!-- Recent Posts -->    <div class="sidebar-section">      <h3>Recent Post</h3>      <div class="recent-posts">        <div class="recent-post-item" *ngFor="let post of recentPosts">          <img [src]="post.image" [alt]="post.title">          <div class="recent-post-content">            <h4>{{ post.title }}</h4>            <p class="date">{{ post.date }}</p>          </div>        </div>      </div>    </div>    <!-- Popular Tags -->    <div class="sidebar-section">      <h3>Popular Tag</h3>      <div class="tags">        <span class="tag" *ngFor="let tag of popularTags">{{ tag }}</span>      </div>    </div>    <!-- Newsletter Box -->    <div class="sidebar-section newsletter">      <div class="newsletter-content">        <h3>Latest Type of Articles in your Inbox</h3>        <button class="subscribe-btn">Join Now</button>      </div>    </div>  </aside>  <!-- Main Content -->  <main class="main-content">    <h1 class="page-title">Blog Standard</h1>    <p class="page-subtitle">Home / Blogs</p>    <!-- Blog Posts -->    <div class="blog-posts">      <article class="blog-post" *ngFor="let post of paginatedPosts">        <img [src]="post.image" [alt]="post.title" class="post-image">        <div class="post-content">          <p class="post-date">{{ post.date }}</p>          <h2 class="post-title">{{ post.title }}</h2>          <p class="post-description">{{ post.description }}</p>        </div>      </article>    </div>    <!-- Pagination -->    <div class="pagination">      <button class="page-btn"               (click)="previousPage()"               [disabled]="currentPage === 1">        ←      </button>            <button *ngFor="let page of pageNumbers"               class="page-btn"               [class.active]="page === currentPage"              (click)="goToPage(page)">        {{ page }}      </button>            <button class="page-btn"               (click)="nextPage()"               [disabled]="currentPage === totalPages">        →      </button>    </div>  </main></div></div>'
+    var COMPONENTS = [{'name': 'AdminDashboard', 'selector': 'app-admin-dashboard'},{'name': 'App', 'selector': 'app-root'},{'name': 'Blog', 'selector': 'app-blog'},{'name': 'Cart', 'selector': 'app-cart'},{'name': 'Checkout', 'selector': 'app-checkout'},{'name': 'Contactus', 'selector': 'app-contact'},{'name': 'Dashboard', 'selector': 'app-dashboard'},{'name': 'Footer', 'selector': 'app-footer'},{'name': 'Home', 'selector': 'app-home'},{'name': 'Login', 'selector': 'app-login'},{'name': 'NavAuth', 'selector': 'app-nav'},{'name': 'NavBlank', 'selector': 'app-nav-blank'},{'name': 'Notfound', 'selector': 'app-notfound'},{'name': 'Products', 'selector': 'app-products'},{'name': 'register', 'selector': 'app-register'},{'name': 'Singleproduct', 'selector': 'app-singleproduct'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'Blog'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'Blog.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
